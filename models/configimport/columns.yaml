@@ -1,0 +1,11 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: waka.importexport::lang.comon.name
+    model:
+        label: waka.importexport::lang.comon.model
+     type:
+        label: waka.importexport::lang.comon.type

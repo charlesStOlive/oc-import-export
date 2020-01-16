@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: waka.importexport::lang.comon.name
+    model:
+        label: waka.importexport::lang.comon.model
+    type:
+        label: waka.importexport::lang.comon.type
+        placeholder: waka.importexport::lang.comon.type_placeholder
+        type: dropdown
+        options: 
+            - ImportModel
+    config:
+        label: waka.importexport::lang.comon.config
+    use_batch:
+        label: waka.importexport::lang.comon.use_batch

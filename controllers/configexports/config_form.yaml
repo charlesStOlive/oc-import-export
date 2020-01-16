@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Config Export
+
+# Model Form Field configuration
+form: $/waka/importexport/models/configexport/fields.yaml
+
+# Model Class name
+modelClass: Waka\ImportExport\Models\ConfigExport
+
+# Default redirect location
+defaultRedirect: waka/importexport/configexports
+
+# Create page
+create:
+    title: Create Config Export
+    redirect: waka/importexport/configexports/update/:id
+    redirectClose: waka/importexport/configexports
+
+# Update page
+update:
+    title: Edit Config Export
+    redirect: waka/importexport/configexports
+    redirectClose: waka/importexport/configexports
+
+# Preview page
+preview:
+    title: Preview Config Export

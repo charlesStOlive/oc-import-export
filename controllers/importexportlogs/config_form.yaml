@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Import Export Log
+
+# Model Form Field configuration
+form: $/waka/importexport/models/importexportlog/fields.yaml
+
+# Model Class name
+modelClass: Waka\ImportExport\Models\ImportExportLog
+
+# Default redirect location
+defaultRedirect: waka/importexport/importexportlogs
+
+# Create page
+create:
+    title: Create Import Export Log
+    redirect: waka/importexport/importexportlogs/update/:id
+    redirectClose: waka/importexport/importexportlogs
+
+# Update page
+update:
+    title: Edit Import Export Log
+    redirect: waka/importexport/importexportlogs
+    redirectClose: waka/importexport/importexportlogs
+
+# Preview page
+preview:
+    title: Preview Import Export Log

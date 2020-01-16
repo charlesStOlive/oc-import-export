@@ -1,0 +1,6 @@
+1.0.1: 
+  - 'First version of ImportExport'
+  - create_config_exports_table.php
+  - create_config_imports_table.php
+  - create_import_export_logs_table.php
+  - create_import_types_table.php
