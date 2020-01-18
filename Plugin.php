@@ -43,6 +43,15 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        Event::listen('backend.top.index', function($controller) {
+            if(in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
+                $data = [
+                    'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
+                    //'modelId' => $controller->formGetModel()->id
+                ];
+                return View::make('waka.importexport::excelImport')->withData($data);;
+            }
+        });
 
     }
 
@@ -84,7 +93,11 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
+        return[];
+
+    }
+    public function registerSettings()
+    {
 
         return [
             'import' => [
@@ -109,7 +122,7 @@ class Plugin extends PluginBase
                 'label'       => Lang::get('waka.importexport::lang.menu.types_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.types_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/importtypes'),
+                'url'         => Backend::url('waka/importexport/types'),
                 'icon'        => 'icon-file-code-o',
                 'permissions' => ['waka.importexport.*'],
                 'order'       => 500,
@@ -118,7 +131,7 @@ class Plugin extends PluginBase
                 'label'       => Lang::get('waka.importexport::lang.menu.logs_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/importtypes'),
+                'url'         => Backend::url('waka/importexport/types'),
                 'icon'        => 'icon-terminal',
                 'permissions' => ['waka.importexport.*'],
                 'order'       => 500,

@@ -13,9 +13,13 @@ class CreateConfigImportsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('model');
-            $table->integer('import_type_id')->unsigned();
-            $table->text('config');
-            $table->boolean('use_batch')->default(0);
+            $table->boolean('unique_care')->default(true);
+            $table->boolean('unique_action')->default(false);
+            $table->string('unique_key')->nullable();
+            $table->string('unique_column')->nullable();
+            $table->integer('type_id')->unsigned();
+            $table->text('column_list');
+            $table->boolean('use_batch')->default(false);
             $table->timestamps();
         });
     }

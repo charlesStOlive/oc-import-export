@@ -7,5 +7,7 @@ columns:
         label: waka.importexport::lang.comon.name
     model:
         label: waka.importexport::lang.comon.model
-     type:
+    type_name:
         label: waka.importexport::lang.comon.type
+        relation: type
+        select: name

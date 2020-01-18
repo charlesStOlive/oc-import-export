@@ -63,7 +63,7 @@ class ConfigImport extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'import_type' => ['Waka\ImportExport\Models\ImportType']
+        'type' => ['Waka\ImportExport\Models\Type']
     ];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -73,4 +73,8 @@ class ConfigImport extends Model
     ];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function listTypes() {
+        return Type::where('import', true)->lists('name', 'id');
+    }
 }

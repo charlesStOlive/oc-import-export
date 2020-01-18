@@ -11,9 +11,37 @@ fields:
         label: waka.importexport::lang.comon.type
         placeholder: waka.importexport::lang.comon.type_placeholder
         type: dropdown
-        options: 
-            - ImportModel
-    config:
+        options: listTypes
+    unique_care:
+        label: waka.importexport::lang.comon.unique_care
+        comment: waka.importexport::lang.comon.unique_care_comment
+        type: checkbox
+        default: true
+    unique_action:
+        label: waka.importexport::lang.comon.unique_action
+        comment: waka.importexport::lang.comon.unique_action_comment
+        type: checkbox
+        trigger:
+            action: show
+            field: unique_care
+            condition: checked
+    unique_key:
+        label: waka.importexport::lang.comon.unique_key
+        trigger:
+            action: show
+            field: unique_care
+            condition: checked
+    unique_column:
+        label: waka.importexport::lang.comon.unique_column
+        trigger:
+            action: show
+            field: unique_care
+            condition: checked
+
+    column_list:
         label: waka.importexport::lang.comon.config
+        type: codeeditor
+        language: yaml
     use_batch:
         label: waka.importexport::lang.comon.use_batch
+        type: checkbox

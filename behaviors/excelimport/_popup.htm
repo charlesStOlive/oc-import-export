@@ -1,0 +1,33 @@
+<?= Form::open() ?>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="popup">×</button>
+    <h4 class="modal-title">
+        Importer excel
+    </h4>
+</div>
+
+<input type="hidden" name="logeable_type" value="<?= $model ?>" />
+
+<div class="modal-body">
+    <select class="form-control custom-select" name="logeable_id">
+        <option value="" disabled selected>--Choose an import--</option>
+        <?php foreach($options as $key => $value)  { ?>
+        <option value="<?=$key?>"><?=$value?></option>
+        <?php } ?>
+    </select>
+    <?= $ImportPopupWidget->render() ?>
+</div>
+
+<div class="modal-footer">
+    <button type="submit" data-request="onImportValidation" data-request-data="redirect:0" data-hotkey="ctrl+s, cmd+s"
+        data-popup-load-indicator class="btn btn-primary">
+        Valider
+    </button>
+
+    <button type="button" class="btn btn-default" data-dismiss="popup">
+        Annuler
+    </button>
+</div>
+
+<?= Form::close() ?>

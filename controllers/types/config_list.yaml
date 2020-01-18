@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/waka/importexport/models/importtype/columns.yaml
+list: $/waka/importexport/models/type/columns.yaml
 
 # Model Class name
-modelClass: Waka\ImportExport\Models\ImportType
+modelClass: Waka\ImportExport\Models\Type
 
 # List Title
 title: Manage Import Types
 
 # Link URL for each record
-recordUrl: waka/importexport/importtypes/update/:id
+recordUrl: waka/importexport/types/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

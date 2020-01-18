@@ -17,7 +17,7 @@ class ImportExportLog extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['id'];
 
     /**
      * @var array Fillable fields
@@ -69,6 +69,13 @@ class ImportExportLog extends Model
     ];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [];
+    public $attachOne = [
+        'excel_file' => 'System\Models\File'
+    ];
     public $attachMany = [];
+
+    public function listImportTypes() {
+        trace_log($this->logeable_type);
+        return Type::where('import', true)->lists('name', 'id');
+    }
 }

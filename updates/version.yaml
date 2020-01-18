@@ -3,4 +3,5 @@
   - create_config_exports_table.php
   - create_config_imports_table.php
   - create_import_export_logs_table.php
-  - create_import_types_table.php
+  - create_types_table.php
+  - seed_tables.php

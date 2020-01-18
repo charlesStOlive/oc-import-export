@@ -2,11 +2,12 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use System\Classes\SettingsManager;
 
 /**
  * Import Types Back-end Controller
  */
-class ImportTypes extends Controller
+class Types extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -20,8 +21,8 @@ class ImportTypes extends Controller
     {
         parent::__construct();
 
-        //BackendMenu::setContext('Waka.ImportExport', 'importexport', 'importtypes');
+        //BackendMenu::setContext('Waka.ImportExport', 'importexport', 'types');
         BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('Waka.ImportExport', 'importtypes');
+        SettingsManager::setContext('Waka.ImportExport', 'types');
     }
 }

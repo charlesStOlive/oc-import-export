@@ -3,16 +3,16 @@
 use Model;
 
 /**
- * ImportType Model
+ * Type Model
  */
-class ImportType extends Model
+class Type extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'waka_importexport_import_types';
+    public $table = 'waka_importexport_types';
 
     /**
      * @var array Guarded fields
@@ -22,7 +22,7 @@ class ImportType extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'import'];
 
     /**
      * @var array Validation rules for attributes

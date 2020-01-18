@@ -1,0 +1,13 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: waka.importexport::lang.type.name
+    import:
+        label: waka.importexport::lang.type.import
+        type: checkbox
+    class:
+        label: waka.importexport::lang.type.class
+

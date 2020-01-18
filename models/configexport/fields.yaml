@@ -11,8 +11,11 @@ fields:
         label: waka.importexport::lang.comon.type
         placeholder: waka.importexport::lang.comon.type_placeholder
         type: dropdown
-        options: listType
-    config:
+        options: listTypes
+    column_list:
         label: waka.importexport::lang.comon.config
+        type: codeeditor
+        language: yaml
     use_batch:
         label: waka.importexport::lang.comon.use_batch
+        type: checkbox

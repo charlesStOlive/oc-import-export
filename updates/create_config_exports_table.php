@@ -13,7 +13,7 @@ class CreateConfigExportsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('model');
-            $table->integer('import_type_id')->unsigned();
+            $table->integer('type_id')->unsigned();
             $table->text('config');
             $table->boolean('use_batch')->default(0);
             $table->timestamps();

@@ -4,14 +4,15 @@ use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateImportTypesTable extends Migration
+class CreateTypesTable extends Migration
 {
     public function up()
     {
-        Schema::create('waka_importexport_import_types', function (Blueprint $table) {
+        Schema::create('waka_importexport_types', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->increments('name');
+            $table->string('name');
+            $table->string('class');
             $table->boolean('import');
             $table->timestamps();
         });
@@ -19,6 +20,6 @@ class CreateImportTypesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('waka_importexport_import_types');
+        Schema::dropIfExists('waka_importexport_types');
     }
 }
