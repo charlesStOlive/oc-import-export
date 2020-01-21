@@ -1,4 +1,4 @@
-<?php namespace Waka\Publisher\Updates;
+<?php namespace Waka\ImportExport\Updates;
 
 //use Excel;
 use Seeder;
@@ -29,14 +29,11 @@ class SeedTables extends Seeder
             'class' => 'Waka\\ImportExport\\Classes\\Imports\\ImportModelPicture'
         ]);
         
-        // $sql = plugins_path('waka\publisher\updates\sql\waka_publisher_bloc_types.sql');
-        // DB::unprepared(file_get_contents($sql));
+        $sql = plugins_path('waka\importexport\updates\sql\waka_importexport_config_exports.sql');
+        DB::unprepared(file_get_contents($sql));
 
-        // $sql = plugins_path('waka\publisher\updates\sql\waka_publisher_contents.sql');
-        // DB::unprepared(file_get_contents($sql));
-
-        // $sql = plugins_path('waka\publisher\updates\sql\waka_publisher_documents.sql');
-        // DB::unprepared(file_get_contents($sql));
+        $sql = plugins_path('waka\importexport\updates\sql\waka_importexport_config_imports.sql');
+        DB::unprepared(file_get_contents($sql));
 
         // $sql = plugins_path('waka\publisher\updates\sql\waka_publisher_blocs.sql');
         // DB::unprepared(file_get_contents($sql));

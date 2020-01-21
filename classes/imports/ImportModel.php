@@ -6,10 +6,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\BeforeImport;
 use Session;
-use \Waka\ImportExport\Classes\YamlExcel;
 use \Waka\ImportExport\Models\ConfigImport;
-
-use Waka\Crsm\Models\Contact;
 
 class ImportModel implements ToCollection, WithHeadingRow, WithEvents
 {
@@ -19,20 +16,14 @@ class ImportModel implements ToCollection, WithHeadingRow, WithEvents
         $parser = $this->parser;
         foreach ($rows as $row) 
         {
-            $newModel = new $parser->model;
+            $model =  $parser->getModelOrNew($row);
             foreach($parser->fieldObjects as $fieldObject) {
-                //trace_log($fieldObject->key.' : '.$fieldObject->getValue($row));
-                $newModel[$fieldObject->key] = $fieldObject->getValue($row);
+                $model[$fieldObject->key] = $fieldObject->getValue($row);
             }
             if($parser->hasRelations) {
                 foreach($parser->relations as $relation) {
-                    $relatedModel;
                     $relatedModelId =  $relation->getRelationId($row);
-                    if($relatedModelId) {
-                        $relatedModel = $relation->model::find($relatedModelId);
-                    }  else {
-                        $relatedModel = new $relation->model;
-                    }
+                    $relatedModel = $relation->model::find($relatedModelId) ?? new $relation->model;
                     $cloudis = [];
                     foreach($relation->fieldObjects as $fieldObject) {
                         //Traitement spécial pour cloudi. 
@@ -40,7 +31,6 @@ class ImportModel implements ToCollection, WithHeadingRow, WithEvents
                             array_push($cloudis, $fieldObject->key);
                         }
                             $relatedModel->{$fieldObject->key} = $fieldObject->getValue($row);
-                        
                     }
                     if($relatedModelId && !$relation->unique_update) {
                         // Si la relation existe mais qu'il n' y a pas de demande d'update, On saute le doublon. 
@@ -48,10 +38,17 @@ class ImportModel implements ToCollection, WithHeadingRow, WithEvents
                         $relatedModel->save();
                         if(count($cloudis)) $relatedModel->uploadToCloudinary($cloudis);
                     }
-                    $newModel[$relation->name] = $relatedModel;
+                    $model[$relation->name] = $relatedModel;
                 }
             }
-            $newModel->save();
+            if($parser->isUpdate && !$parser->unique_update) {
+                // Si la relation existe mais qu'il n' y a pas de demande d'update, On saute le doublon. 
+            } elseif(!$parser->isUpdate && !$parser->unique_create) {
+                // Si la relation n'existe pas et que la création est interdite, on saute. 
+            } else {
+                $model->save();
+
+            }
             trace_log("FIN EXPORT");
         }
     }

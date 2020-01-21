@@ -19,16 +19,22 @@ return [
         'type' => "Type d'import",
         'type_placeholder' => "Choisissez le type d'import",
         'use_batch' => 'Utilisation du batch',
-        "unique_care" => "Vérifier les clés unique",
-        "unique_care_comment" => "Permet de modifier le comportement de l'importateur",
-        "unique_action" => "Updater le modèle",
-        "unique_action_comment" => "Updater le modèle avec les infos contenu dans la feuille excel, sinon les champs seront ignorés",
-        "unique_key" => "Clé unique du modèle à surveiller",
-        "unique_column" => "Colonne Excel contenant la clé",
+        'comment' => 'Information',
+    ],
+    'global' => [
+        'export_title' => "Exporter vers Excel",
+        'import_title' => "Importer depuis Excel",
+        'btn_import' => "Import Excel",
+        'btn_export' => "Export Excel",
     ],
     'type' => [
         'name' => "Intitulé de la class d'import",
         'import' => "Est ce un import ?",
         'class' => 'Chemin de la classe',
     ],
+    'importexportlog' => [
+        'logeable' => 'Choisissez un type',
+        'logeable_placeholder' => '--Choisissez--',
+        'excel_file' => 'Importer une feuille excel',
+    ]
 ];

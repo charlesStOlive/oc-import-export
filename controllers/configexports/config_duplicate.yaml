@@ -4,10 +4,10 @@
 # ATTENTION LE TITRE NE DOIT PAS AVOIR D ESPACE
 
 # Model Class name
-modelClass: Waka\ImportExport\Models\ConfigImport
+modelClass: Waka\ImportExport\Models\ConfigExport
 
 title: Dupliquer la config.
-redirect: backend/waka/importexport/configimports/update/
+redirect: backend/waka/importexport/configexports/update/
 
 duplication:
     #Les champs dans le tableau relation seront cloné et attaché au nouveau model 

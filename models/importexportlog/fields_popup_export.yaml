@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    logeable_id:
+        label: waka.importexport::lang.importexportlog.logeable
+        placeholder: waka.importexport::lang.importexportlog.logeable_placeholder
+        type: dropdown
+        options: listExport
+    _info:
+        type: commentfield
+        valueFrom: CommentExport
+        dependsOn: logeable_id
+    

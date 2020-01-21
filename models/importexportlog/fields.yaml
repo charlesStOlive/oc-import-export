@@ -15,3 +15,4 @@ fields:
     comments:
         label: waka.importexport::lang.importexportlog.comments
         type: richeeditor
+        

@@ -14,7 +14,8 @@ class CreateConfigExportsTable extends Migration
             $table->string('name');
             $table->string('model');
             $table->integer('type_id')->unsigned();
-            $table->text('config');
+            $table->text('column_list');
+            $table->text('comment')->nullable();
             $table->boolean('use_batch')->default(0);
             $table->timestamps();
         });

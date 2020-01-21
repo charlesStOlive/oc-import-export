@@ -12,6 +12,12 @@ use View;
 class Plugin extends PluginBase
 {
     /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Waka.Utils'];
+
+
+    /**
      * Returns information about this plugin.
      *
      * @return array
@@ -49,7 +55,16 @@ class Plugin extends PluginBase
                     'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
                     //'modelId' => $controller->formGetModel()->id
                 ];
-                return View::make('waka.importexport::excelImport')->withData($data);;
+                return View::make('waka.importexport::excelimport_popup')->withData($data);;
+            }
+        });
+        Event::listen('backend.top.index', function($controller) {
+            if(in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
+                $data = [
+                    'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
+                    //'modelId' => $controller->formGetModel()->id
+                ];
+                return View::make('waka.importexport::excelexport_popup')->withData($data);;
             }
         });
 

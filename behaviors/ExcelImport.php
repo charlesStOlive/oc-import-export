@@ -18,21 +18,19 @@ class ExcelImport extends ControllerBehavior
         $this->ImportPopupWidget = $this->createImportPopupWidget();
     }
     public function onImport() {
+        trace_log("On import");
         $configImportId = 1;
         $configImport = ConfigImport::find($configImportId);
         Session::put('excel.configImportId', $configImportId);
-        Excel::import(new $configImport->type->class, plugins_path('waka/crsm/updates/excels/contacts.xlsx'));
+        Excel::import(new $configImport->type->class, plugins_path('waka/crsm/updates/excels/maj_contact.xlsx'));
         return Redirect::refresh();
     }
     public function onImportPopupForm() {
         $model = post('model');
-        $this->vars['options'] = $this->loadDropdownImportValue($model);
+        Session::put('modelImportExportLog.targetModel', $model);
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
         $this->vars['model'] = $model;
         return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup.htm');
-    }
-    public function loadDropdownImportValue($model) {
-        return ConfigImport::where('model', '=', $model)->lists('name', 'id');
     }
  
     public function onImportValidation() {
@@ -40,13 +38,12 @@ class ExcelImport extends ControllerBehavior
         $sessionKey = \Input::get('_session_key');
         $iel = new \Waka\ImportExport\Models\ImportExportLog;
         $iel->fill($data);
-        $iel->logeable_type = post('logeable_type');
-        $iel->logeable_id = post('logeable_id');
         $file = $iel
             ->excel_file()
             ->withDeferred($sessionKey) // how to get this session key dynamically?
             ->first();
         //le fichier est maintenant prêt à être traité. 
+        $iel->save();
         $configImportId = post('logeable_id');
         $configImport = ConfigImport::find($configImportId);
         Session::put('excel.configImportId', $configImportId);
@@ -55,7 +52,7 @@ class ExcelImport extends ControllerBehavior
     }
 
     public function createImportPopupWidget() {
-        $config = $this->makeConfig('$/waka/importexport/models/importexportlog/fields_popup.yaml');
+        $config = $this->makeConfig('$/waka/importexport/models/importexportlog/fields_popup_import.yaml');
         $config->alias = 'importformWidget';
         $config->arrayName = 'import_array';
         $config->model = new \Waka\ImportExport\Models\ImportExportLog;

@@ -13,6 +13,7 @@ class ConfigImports extends Controller
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Waka.Utils.Behaviors.DuplicateModel',
+        
 
     ];
 

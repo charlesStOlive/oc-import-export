@@ -1,4 +1,4 @@
-<?php namespace Waka\ImportExport\Classes;
+<?php namespace Waka\ImportExport\Classes\Imports;
 use Yaml;
 use System\Models\File;
 use Config;
@@ -11,7 +11,6 @@ Class FieldObject {
     public $values;
     //
     public $hasRelation;
-    public $model;
     public $modelAttribute;
     //
     private $type;
@@ -25,13 +24,12 @@ Class FieldObject {
     const MODELTYPE = 'model_type';
     const RELATIONKEY = 'relation_key';
 
-    public function __construct($key, $values) 
+    public function __construct($key, $values, $parentModel=null) 
     {
         $this->values = $values; 
         $this->key = $key;
-        if(array_key_exists(self::COLUMN, $values)) {
-            $this->column = $values[self::COLUMN];
-        }
+        $this->column = array_key_exists(self::COLUMN, $values) ? $values[self::COLUMN] : null;
+        $this->type = 'normal';
     }
     
     public function getSlug() {
@@ -50,24 +48,14 @@ Class FieldObject {
         return $this->checkOption(self::RELATIONKEY);
     }
     public function getValue($columns) {
-        // trace_log("____________Get Value________");
-        // trace_log($columns);
         $slug = $this->getSlug();
         if($slug) return str_slug($columns[$slug]);
 
         $relation = $this->getRelationKey();
         if($relation) {
             $modelRelation = new $this->values['model'];
-            trace_log($relation.' '.$columns[$this->column]);
             $modelRelation = $modelRelation::where($relation, '=', $columns[$this->column])->first();
-            // $test = \Waka\Crsm\Models\Client::where($relation, '=', $columns[$this->column])->first();
-            // trace_log($test->id);
-            
-            if($modelRelation) {
-                return $modelRelation->id;
-            } else {
-                return null;
-            }
+            return $modelRelation->id ?? null;
         }
 
         $srcType = $this->getSrcType();
@@ -82,21 +70,12 @@ Class FieldObject {
             $file->fromUrl($url);
             return $file;
         }
-        
-
-
-
         $constante = $this->getConstante();
         if($constante) return $constante;
 
         return $columns[$this->column];
     }
     private function checkOption($test) {
-        if(array_key_exists($test, $this->values)) {
-            return $this->values[$test];
-        } else {
-            return false;
-        }
-
+        return array_key_exists($test, $this->values) ? $this->values[$test] : false;
     }
 }

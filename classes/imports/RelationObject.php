@@ -1,4 +1,4 @@
-<?php namespace Waka\ImportExport\Classes;
+<?php namespace Waka\ImportExport\Classes\Imports;
 use Yaml;
 
 
@@ -28,11 +28,7 @@ Class RelationObject {
     public function getRelationId($columns) {
         $model = new $this->model;
         $model = $model::where($this->unique_key, '=', $columns[$this->unique_column]);
-        if($model->count()) {
-            return $model->first()->id;
-        } else {
-            return false;
-        }
+        return $model->count() > 0 ? $model->first()->id : false;
     }
     
     
