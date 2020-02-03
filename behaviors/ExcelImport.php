@@ -43,8 +43,11 @@ class ExcelImport extends ControllerBehavior
             ->withDeferred($sessionKey) // how to get this session key dynamically?
             ->first();
         //le fichier est maintenant prêt à être traité. 
-        $iel->save();
-        $configImportId = post('logeable_id');
+        //$iel->save();
+        $configImportId = $data['logeable_id'];
+        // trace_log(post('logeable_id'));
+        // trace_log($data);
+
         $configImport = ConfigImport::find($configImportId);
         Session::put('excel.configImportId', $configImportId);
         Excel::import(new $configImport->type->class, $file->getDiskPath());

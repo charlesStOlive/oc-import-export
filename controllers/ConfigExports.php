@@ -25,6 +25,6 @@ class ConfigExports extends Controller
 
         //BackendMenu::setContext('Waka.ImportExport', 'importexport', 'configexports');
         BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('Waka.ImportExport', 'configexports');
+        SettingsManager::setContext('Waka.ImportExport', 'configExports');
     }
 }

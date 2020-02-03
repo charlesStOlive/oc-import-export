@@ -23,6 +23,6 @@ class Types extends Controller
 
         //BackendMenu::setContext('Waka.ImportExport', 'importexport', 'types');
         BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('Waka.ImportExport', 'types');
+        SettingsManager::setContext('Waka.ImportExport', 'configImportTypes');
     }
 }

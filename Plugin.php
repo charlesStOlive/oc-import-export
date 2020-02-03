@@ -115,7 +115,7 @@ class Plugin extends PluginBase
     {
 
         return [
-            'import' => [
+            'configImports' => [
                 'label'       => Lang::get('waka.importexport::lang.menu.imports_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.imports_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
@@ -124,7 +124,7 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.importexport.*'],
                 'order'       => 500,
             ],
-            'export' => [
+            'configExports' => [
                 'label'       => Lang::get('waka.importexport::lang.menu.exports_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.exports_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
@@ -133,7 +133,7 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.importexport.*'],
                 'order'       => 500,
             ],
-            'type' => [
+            'configImportTypes' => [
                 'label'       => Lang::get('waka.importexport::lang.menu.types_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.types_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
@@ -142,7 +142,7 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.importexport.*'],
                 'order'       => 500,
             ],
-            'logs' => [
+            'configImportlogs' => [
                 'label'       => Lang::get('waka.importexport::lang.menu.logs_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
                 'category'    => Lang::get('waka.importexport::lang.menu.category'),
