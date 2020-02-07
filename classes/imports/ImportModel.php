@@ -49,7 +49,7 @@ class ImportModel implements ToCollection, WithHeadingRow, WithEvents
                 $model->save();
 
             }
-            trace_log("FIN EXPORT");
+           //trace_log("FIN EXPORT");
         }
     }
 

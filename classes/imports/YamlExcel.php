@@ -34,7 +34,7 @@ Class YamlExcel {
         $this->unique_update = $baseModel['unique_update'] ?? false;
         $this->unique_column = $baseModel['unique_column'] ?? false;
         $this->unique_key = $baseModel['unique_key'] ?? false;
-        trace_log("ok parse");
+       //trace_log("ok parse");
         //traitement des fields classique
         $fields = $baseModel['fields'];
         foreach($fields as $key => $value) {
@@ -49,10 +49,10 @@ Class YamlExcel {
     public function getModelOrNew($columns) {
             // le this update est dangereux a retravaillé. 
             $this->isUpdate = false;
-            trace_log("On recherche le model");
+           //trace_log("On recherche le model");
             $excelUniqueColumn = $columns[$this->unique_column] ?? false;
             $findModel;
-            trace_log("Valeur recherché : ".$excelUniqueColumn." : ".$this->unique_key);
+           //trace_log("Valeur recherché : ".$excelUniqueColumn." : ".$this->unique_key);
             if($excelUniqueColumn) {
                 $findModel = $this->model::where($this->unique_key, '=', $excelUniqueColumn)->first();
                 if($findModel) {

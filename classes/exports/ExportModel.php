@@ -20,7 +20,6 @@ class ExportModel implements FromCollection, WithEvents, WithStrictNullCompariso
 
     public function collection()
     {
-        trace_log($this->parser->headers());
         return $this->parser->export();
     }
     public function registerEvents(): array

@@ -11,4 +11,7 @@ columns:
         label: waka.importexport::lang.comon.type
         relation: type
         select: name
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: timetense
 

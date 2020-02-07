@@ -76,7 +76,7 @@ class ImportExportLog extends Model
     public $attachMany = [];
 
     public function listImportTypes() {
-        trace_log($this->logeable_type);
+       //trace_log($this->logeable_type);
         return Type::where('import', true)->lists('name', 'id');
     }
     public function listImport() {

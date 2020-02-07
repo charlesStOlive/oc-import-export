@@ -18,7 +18,6 @@ class ExcelImport extends ControllerBehavior
         $this->ImportPopupWidget = $this->createImportPopupWidget();
     }
     public function onImport() {
-        trace_log("On import");
         $configImportId = 1;
         $configImport = ConfigImport::find($configImportId);
         Session::put('excel.configImportId', $configImportId);
