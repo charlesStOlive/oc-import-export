@@ -1,0 +1,14 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: waka.importexport::lang.user.name
+
+    model:
+        label: Model cible
+    
+    type: 
+        label: type
+

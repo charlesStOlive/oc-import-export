@@ -10,6 +10,7 @@ fields:
         options: listImport
     _info:
         type: commentfield
+        mode: dynamic
         valueFrom: CommentImport
         dependsOn: logeable_id
     excel_file:

@@ -51,7 +51,15 @@ class ExcelImport extends ControllerBehavior
 
         $configImport = ConfigImport::find($configImportId);
         Session::put('excel.configImportId', $configImportId);
-        Excel::import(new $configImport->type->class, $file->getDiskPath());
+        if ($configImport->is_editable) {
+            Excel::import(new \Waka\ImportExport\Classes\Imports\ImportModel, $file->getDiskPath());
+        } else {
+            if (!$configImport->import_model_class) {
+                throw new \SystemException('import_model_class manqunt dans configexport');
+            }
+            Excel::import(new $configImport->import_model_class, $file->getDiskPath());
+        }
+        //Excel::import(new $configImport->type->class, $file->getDiskPath());
         return Redirect::refresh();
     }
 

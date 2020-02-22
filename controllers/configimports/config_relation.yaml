@@ -1,0 +1,11 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+users:
+    label: Utilsateurs
+    view:
+        list: $/waka/importexport/models/configexport/user_columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        list: $/waka/importexport/models/configexport/user_columns.yaml

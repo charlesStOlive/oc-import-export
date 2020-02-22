@@ -20,6 +20,14 @@ return [
         'type_placeholder' => "Choisissez le type d'import",
         'use_batch' => 'Utilisation du batch',
         'comment' => 'Information',
+        'is_editable' => 'Editable ?',
+        'import_model_class' => "Chemin de la classe d'import",
+    ],
+    'user' => [
+        'first_name' => "Prénom",
+        'last_name' => "Nom",
+        'role' => "Role",
+
     ],
     'global' => [
         'export_title' => "Exporter vers Excel",
@@ -36,5 +44,5 @@ return [
         'logeable' => 'Choisissez un type',
         'logeable_placeholder' => '--Choisissez--',
         'excel_file' => 'Importer une feuille excel',
-    ]
+    ],
 ];

@@ -1,9 +1,9 @@
 <?php namespace Waka\ImportExport;
 
 use Backend;
-use System\Classes\PluginBase;
-use Lang;
 use Event;
+use Lang;
+use System\Classes\PluginBase;
 use View;
 
 /**
@@ -16,7 +16,6 @@ class Plugin extends PluginBase
      */
     public $require = ['Waka.Utils'];
 
-
     /**
      * Returns information about this plugin.
      *
@@ -25,10 +24,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'ImportExport',
+            'name' => 'ImportExport',
             'description' => 'No description provided yet...',
-            'author'      => 'Waka',
-            'icon'        => 'icon-leaf'
+            'author' => 'Waka',
+            'icon' => 'icon-leaf',
         ];
     }
 
@@ -49,8 +48,21 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        Event::listen('backend.top.index', function($controller) {
-            if(in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
+        /**
+         * INJECTOR
+         */
+        \Waka\ImportExport\Injectors\ConfigImportExportBackendUser::inject();
+
+        /**
+         * EVENT FOR BUTTON
+         */
+        Event::listen('backend.top.index', function ($controller) {
+            $user = \BackendAuth::getUser();
+            if (!$user->hasAccess('waka.importexport.impexp.*') && !$user->hasAccess('waka.importExport.imp')) {
+                return;
+            }
+
+            if (in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
                 $data = [
                     'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
                     //'modelId' => $controller->formGetModel()->id
@@ -58,8 +70,12 @@ class Plugin extends PluginBase
                 return View::make('waka.importexport::excelimport_popup')->withData($data);;
             }
         });
-        Event::listen('backend.top.index', function($controller) {
-            if(in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
+        Event::listen('backend.top.index', function ($controller) {
+            $user = \BackendAuth::getUser();
+            if (!$user->hasAccess('waka.importexport.impexp.*') && !$user->hasAccess('waka.importExport.exp')) {
+                return;
+            }
+            if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
                 $data = [
                     'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
                     //'modelId' => $controller->formGetModel()->id
@@ -91,12 +107,26 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'waka.importexport.some_permission' => [
-                'tab' => 'ImportExport',
-                'label' => 'Some permission'
+            'waka.importExport.impexp.all.admin' => [
+                'tab' => 'Waka',
+                'label' => 'Administrateur des imports exports',
+            ],
+            'waka.importExport.impexp.all' => [
+                'tab' => 'Waka',
+                'label' => 'Importe et exporte tout',
+            ],
+            'waka.importExport.impexp.limited' => [
+                'tab' => 'Waka',
+                'label' => 'Importe et exporte des données avec des restrictions',
+            ],
+            'waka.importExport.imp' => [
+                'tab' => 'Waka',
+                'label' => 'Importe des données avec des restrictions',
+            ],
+            'waka.importExport.exp' => [
+                'tab' => 'Waka',
+                'label' => 'Exporte des données avec des restrictions',
             ],
         ];
     }
@@ -108,7 +138,7 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return[];
+        return [];
 
     }
     public function registerSettings()
@@ -116,40 +146,40 @@ class Plugin extends PluginBase
 
         return [
             'configImports' => [
-                'label'       => Lang::get('waka.importexport::lang.menu.imports_title'),
+                'label' => Lang::get('waka.importexport::lang.menu.imports_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.imports_description'),
-                'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/configimports'),
-                'icon'        => 'icon-caret-square-o-down',
-                'permissions' => ['waka.importexport.*'],
-                'order'       => 500,
+                'category' => Lang::get('waka.importexport::lang.menu.category'),
+                'url' => Backend::url('waka/importexport/configimports'),
+                'icon' => 'icon-caret-square-o-down',
+                'permissions' => ['waka.importexport.admin'],
+                'order' => 500,
             ],
             'configExports' => [
-                'label'       => Lang::get('waka.importexport::lang.menu.exports_title'),
+                'label' => Lang::get('waka.importexport::lang.menu.exports_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.exports_description'),
-                'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/configexports'),
-                'icon'        => 'icon-caret-square-o-up',
-                'permissions' => ['waka.importexport.*'],
-                'order'       => 500,
+                'category' => Lang::get('waka.importexport::lang.menu.category'),
+                'url' => Backend::url('waka/importexport/configexports'),
+                'icon' => 'icon-caret-square-o-up',
+                'permissions' => ['waka.importexport.admin'],
+                'order' => 500,
             ],
             'configImportTypes' => [
-                'label'       => Lang::get('waka.importexport::lang.menu.types_title'),
+                'label' => Lang::get('waka.importexport::lang.menu.types_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.types_description'),
-                'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/types'),
-                'icon'        => 'icon-file-code-o',
-                'permissions' => ['waka.importexport.*'],
-                'order'       => 500,
+                'category' => Lang::get('waka.importexport::lang.menu.category'),
+                'url' => Backend::url('waka/importexport/types'),
+                'icon' => 'icon-file-code-o',
+                'permissions' => ['waka.importexport.admin'],
+                'order' => 500,
             ],
             'configImportlogs' => [
-                'label'       => Lang::get('waka.importexport::lang.menu.logs_title'),
+                'label' => Lang::get('waka.importexport::lang.menu.logs_title'),
                 'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
-                'category'    => Lang::get('waka.importexport::lang.menu.category'),
-                'url'         => Backend::url('waka/importexport/types'),
-                'icon'        => 'icon-terminal',
-                'permissions' => ['waka.importexport.*'],
-                'order'       => 500,
+                'category' => Lang::get('waka.importexport::lang.menu.category'),
+                'url' => Backend::url('waka/importexport/types'),
+                'icon' => 'icon-terminal',
+                'permissions' => ['waka.importexport.admin'],
+                'order' => 500,
             ],
         ];
     }

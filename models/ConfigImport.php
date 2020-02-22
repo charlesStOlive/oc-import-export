@@ -54,7 +54,7 @@ class ConfigImport extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -62,19 +62,15 @@ class ConfigImport extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [
-        'type' => ['Waka\ImportExport\Models\Type']
+    public $belongsTo = [];
+    public $belongsToMany = [
+        'users' => ['Backend\Models\User', 'table' => 'waka_configimports_users'],
     ];
-    public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [
-        'logs' => ['Waka\ImportExport\Models\ConfigImport', 'name' => 'logeable']
+        'logs' => ['Waka\ImportExport\Models\ConfigImport', 'name' => 'logeable'],
     ];
     public $attachOne = [];
     public $attachMany = [];
-
-    public function listTypes() {
-        return Type::where('import', true)->lists('name', 'id');
-    }
 }

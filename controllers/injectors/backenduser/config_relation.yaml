@@ -1,0 +1,26 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+configexports:
+    label: Config Export
+    view:
+        list: $/waka/importexport/models/configexport/columns.yaml
+        toolbarButtons: link|unlink
+    manage:
+        list: $/waka/importexport/models/configexport/columns.yaml
+        showSearch: true
+
+configimports:
+    label: Config Imports
+    view:
+        list: $/waka/importexport/models/configimport/columns.yaml
+        toolbarButtons: link|unlink
+    manage:
+        list: $/waka/importexport/models/configimport/columns.yaml
+        showSearch: true
+
+
+
+
+

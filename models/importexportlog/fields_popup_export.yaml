@@ -10,6 +10,7 @@ fields:
         options: listExport
     _info:
         type: commentfield
+        mode: dynamic
         valueFrom: CommentExport
         dependsOn: logeable_id
     

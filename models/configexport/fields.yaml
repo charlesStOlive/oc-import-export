@@ -2,26 +2,46 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
-    name:
-        label: waka.importexport::lang.comon.name
-        span: auto
-    model:
-        label: waka.importexport::lang.comon.model
-        span: auto
-    type:
-        label: waka.importexport::lang.comon.type
-        placeholder: waka.importexport::lang.comon.type_placeholder
-        type: dropdown
-        options: listTypes
-    column_list:
-        label: waka.importexport::lang.comon.config
-        type: codeeditor
-        language: yaml
-    comment:
-        label: waka.importexport::lang.comon.comment
-        type: richeditor
-        toolbarButtons: bold|italic
-    use_batch:
-        label: waka.importexport::lang.comon.use_batch
-        type: checkbox
+tabs:
+    stretch: true
+    defaultTab: Config
+    fields:
+        name:
+            label: waka.importexport::lang.comon.name
+            span: auto
+        model:
+            label: waka.importexport::lang.comon.model
+            span: auto
+        is_editable:
+            label: waka.importexport::lang.comon.is_editable
+            type: checkbox
+            default: true
+        column_list:
+            label: waka.importexport::lang.comon.config
+            type: codeeditor
+            language: yaml
+            trigger:
+                action: show
+                field: is_editable
+                condition: checked
+        import_model_class:
+            label: waka.importexport::lang.comon.import_model_class
+            trigger:
+                action: hide
+                field: is_editable
+                condition: checked
+
+
+        comment:
+            label: waka.importexport::lang.comon.comment
+            type: richeditor
+            toolbarButtons: bold|italic
+        use_batch:
+            label: waka.importexport::lang.comon.use_batch
+            type: checkbox
+        
+        userS@update:
+            label: Accès utilisateurs
+            tab: users
+            type: partial
+            path: $/waka/importexport/controllers/configexports/_field_users.htm

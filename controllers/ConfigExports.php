@@ -12,12 +12,15 @@ class ConfigExports extends Controller
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
+        'Backend.Behaviors.RelationController',
         'Waka.Utils.Behaviors.DuplicateModel',
+
     ];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
-    public $duplicateConfig = 'config_duplicate.yaml'; 
+    public $duplicateConfig = 'config_duplicate.yaml';
+    public $relationConfig = 'config_relation.yaml';
 
     public function __construct()
     {

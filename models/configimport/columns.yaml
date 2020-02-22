@@ -7,10 +7,9 @@ columns:
         label: waka.importexport::lang.comon.name
     model:
         label: waka.importexport::lang.comon.model
-    type_name:
-        label: waka.importexport::lang.comon.type
-        relation: type
-        select: name
+    is_editable:
+        label: waka.importexport::lang.comon.is_editable
+        type: switch
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense

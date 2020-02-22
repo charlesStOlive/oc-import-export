@@ -18,6 +18,13 @@ class ExcelExport extends ControllerBehavior
 
     public function onExportPopupForm()
     {
+        //liste des requêtes filtrées
+        $lists = $this->controller->makeLists();
+        $widget = $lists[0] ?? reset($lists);
+        $query = $widget->prepareQuery();
+        $results = $query->get();
+        Session::put('modelImportExportLog.listId', $results->lists('id'));
+        //
         $model = post('model');
         Session::put('modelImportExportLog.targetModel', $model);
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
@@ -47,14 +54,22 @@ class ExcelExport extends ControllerBehavior
         $configExport = ConfigExport::find($configExportId);
         Session::put('excel.configExportId', $configExportId);
         return Excel::download(new $configExport->type->class, 'test.xlsx');
-
     }
+
     public function makeexcel($id)
     {
         $configExportId = $id;
         $configExport = ConfigExport::find($configExportId);
         Session::put('excel.configExportId', $configExportId);
-        return Excel::download(new $configExport->type->class, 'test.xlsx');
+        if ($configExport->is_editable) {
+            return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel, 'test.xlsx');
+        } else {
+            if (!$configExport->import_model_class) {
+                throw new \SystemException('import_model_class manqunt dans configexport');
+            }
+            return Excel::download(new $configExport->import_model_class, 'test.xlsx');
+        }
+        //return Excel::download(new $configExport->type->class, 'test.xlsx');
 
     }
 

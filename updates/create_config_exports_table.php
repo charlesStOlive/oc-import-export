@@ -1,8 +1,8 @@
 <?php namespace Waka\ImportExport\Updates;
 
-use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
+use Schema;
 
 class CreateConfigExportsTable extends Migration
 {
@@ -13,7 +13,8 @@ class CreateConfigExportsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('model');
-            $table->integer('type_id')->unsigned();
+            $table->string('import_model_class')->nullable();
+            $table->boolean('is_editable')->default(true);
             $table->text('column_list');
             $table->text('comment')->nullable();
             $table->boolean('use_batch')->default(0);
