@@ -56,6 +56,7 @@ class ConfigImportExportBackendUser
             if (!$widget->model instanceof BackendUser) {
                 return;
             }
+
             if ($widget->model->hasAccess('waka.importexport.impexp.limited') || $widget->model->hasAccess('waka.importExport.imp')) {
 
                 $widget->addTabFields([
@@ -80,6 +81,14 @@ class ConfigImportExportBackendUser
                 ]);
 
             }
+
+            $widget->addTabFields([
+                '_comment' => [
+                    'tab' => 'Config Import & Export',
+                    'type' => 'commentfield',
+                    'text' => "Si rien ne s'affiche, soit vous avez des droits pour tous les imports exports, soit vous n'avez aucun droit",
+                ],
+            ]);
 
             // Add an extra birthday field
 

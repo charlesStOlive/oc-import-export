@@ -88,7 +88,7 @@ class ImportExportLog extends Model
         if ($user->hasAccess('waka.importexport.impexp.all.*')) {
             $list = ConfigImport::where('model', '=', $this->logeable_type)->lists('name', 'id');
         } else if ($user->hasAccess('waka.importexport.impexp.limited') || $user->hasAccess('waka.importexport.imp.*')) {
-            trace_log($user->id);
+          //trace_log($user->id);
             $list = ConfigImport::where('model', '=', $this->logeable_type)
                 ->whereHas('users', function ($query) use ($user) {
                     $query->where('id', $user->id);
@@ -103,14 +103,14 @@ class ImportExportLog extends Model
         // $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
         // $list = ConfigExport::where('model', '=', $this->logeable_type)->lists('name', 'id');
         // return $list;
-        trace_log("liste exporte");
+      //trace_log("liste exporte");
         $list = [];
         $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
         $user = \BackendAuth::getUser();
         if ($user->hasAccess('waka.importexport.impexp.all.*')) {
             $list = ConfigExport::where('model', '=', $this->logeable_type)->lists('name', 'id');
         } else if ($user->hasAccess('waka.importexport.impexp.limited') || $user->hasAccess('waka.importExport.exp')) {
-            trace_log($user->id);
+          //trace_log($user->id);
             $list = ConfigExport::where('model', '=', $this->logeable_type)
                 ->whereHas('users', function ($query) use ($user) {
                     $query->where('id', $user->id);
