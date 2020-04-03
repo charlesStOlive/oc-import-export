@@ -29,8 +29,8 @@ class ExportModel implements FromCollection, WithEvents, WithStrictNullCompariso
                 $configExportId = Session::pull('excel.configExportId');
                 $configExport = ConfigExport::find($configExportId);
                 $listId = Session::pull('modelImportExportLog.listId');
-                trace_log("listId in export model");
-                trace_log($listId);
+                //trace_log("listId in export model");
+                //trace_log($listId);
                 $this->parser = new YamlExcel($configExport, $listId);
             },
         ];
