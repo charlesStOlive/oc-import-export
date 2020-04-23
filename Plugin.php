@@ -58,7 +58,9 @@ class Plugin extends PluginBase
          */
         Event::listen('backend.top.index', function ($controller) {
             $user = \BackendAuth::getUser();
-            if (!$user->hasAccess('waka.importexport.impexp.*') && !$user->hasAccess('waka.importExport.imp')) {
+            trace_log($user->hasAccess('waka.importexport.impexp.*'));
+
+            if (!$user->hasAccess('waka.importExport.imp.*')) {
                 return;
             }
 
@@ -72,7 +74,7 @@ class Plugin extends PluginBase
         });
         Event::listen('backend.top.index', function ($controller) {
             $user = \BackendAuth::getUser();
-            if (!$user->hasAccess('waka.importexport.impexp.*') && !$user->hasAccess('waka.importExport.exp')) {
+            if (!$user->hasAccess('waka.importExport.exp.*')) {
                 return;
             }
             if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
@@ -108,24 +110,20 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'waka.importExport.impexp.all.admin' => [
-                'tab' => 'Waka',
-                'label' => 'Administrateur des imports exports',
+            'waka.importexport.imp.admin' => [
+                'tab' => 'Waka - Import Export',
+                'label' => 'Administrateur des imports',
             ],
-            'waka.importExport.impexp.all' => [
-                'tab' => 'Waka',
-                'label' => 'Importe et exporte tout',
-            ],
-            'waka.importExport.impexp.limited' => [
-                'tab' => 'Waka',
-                'label' => 'Importe et exporte des données avec des restrictions',
-            ],
-            'waka.importExport.imp' => [
-                'tab' => 'Waka',
+            'waka.importexport.imp' => [
+                'tab' => 'Waka - Import Export',
                 'label' => 'Importe des données avec des restrictions',
             ],
-            'waka.importExport.exp' => [
-                'tab' => 'Waka',
+            'waka.importexport.exp.admin' => [
+                'tab' => 'Waka - Import Export',
+                'label' => 'Administrateur des exports',
+            ],
+            'waka.importexport.exp' => [
+                'tab' => 'Waka - Import Export',
                 'label' => 'Exporte des données avec des restrictions',
             ],
         ];

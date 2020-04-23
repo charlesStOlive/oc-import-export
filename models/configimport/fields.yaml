@@ -33,7 +33,7 @@ tabs:
         comment:
             label: waka.importexport::lang.comon.comment
             type: richeditor
-            toolbarButtons: bold|italic
+            toolbarButtons: bold|italic|underline|strikeThrough|formatOL|formatUL
         use_batch:
             label: waka.importexport::lang.comon.use_batch
             type: checkbox
