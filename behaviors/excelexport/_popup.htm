@@ -10,6 +10,27 @@
 <input type="hidden" name="logeable_type" value="<?= $model ?>" />
 
 <div class="modal-body">
+    <div class="radio-field inline-options">
+        <label>Que voulez vous exporter ?</label>
+
+        <div class="radio custom-radio">
+            <input name="all" value="1" type="radio" id="all">
+            <label for="all">Tout</label>
+            <p class="help-block">Nombre : <?=$all?></p>
+        </div>
+        <div class="radio custom-radio">
+            <input checked="checked" name="filtered" value="2" type="radio" id="filtered">
+            <label for="filtered">Liste filtré</label>
+            <p class="help-block">Nombre : <?=$filtered?></p>
+        </div>
+        <?php if($countCheck) : ?>
+        <div class="radio custom-radio">
+            <input name="checked" value="2" type="radio" id="checked">
+            <label for="checked">Lignes cochés</label>
+            <p class="help-block">Nombre : <?=$countCheck?></p>
+        </div>
+        <?php endIf ?>
+    </div>
     <?= $ExportPopupWidget->render() ?>
 </div>
 

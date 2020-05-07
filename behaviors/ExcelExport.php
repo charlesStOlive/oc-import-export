@@ -18,17 +18,34 @@ class ExcelExport extends ControllerBehavior
 
     public function onExportPopupForm()
     {
+        trace_log(post());
         //liste des requêtes filtrées
         $lists = $this->controller->makeLists();
         $widget = $lists[0] ?? reset($lists);
         $query = $widget->prepareQuery();
         $results = $query->get();
+        trace_log($query->count());
+
+        $checkedIds = post('checked');
+
+        $countCheck = null;
+        if(is_countable($checkedIds)) {
+            $countCheck = count($checkedIds);
+        }
+
+       
+        //
         Session::put('modelImportExportLog.listId', $results->lists('id'));
+        Session::put('modelImportExportLog.checkedIds', $checkedIds);
         //
         $model = post('model');
         Session::put('modelImportExportLog.targetModel', $model);
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
         $this->vars['model'] = $model;
+        $this->vars['all'] = $model::count();
+        $this->vars['filtered'] = $query->count();
+        $this->vars['countCheck'] = $countCheck;
+        
         return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup.htm');
     }
 
