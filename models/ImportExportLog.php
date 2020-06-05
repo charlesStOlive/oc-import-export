@@ -85,12 +85,12 @@ class ImportExportLog extends Model
         $list = [];
         $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
         $user = \BackendAuth::getUser();
-        trace_log("list import");
+        //trace_log("list import");
         if ($user->hasAccess('waka.importexport.imp.admin') || $user->hasAccess('waka.importexport.imp.user')) {
-            trace_log("non restricted");
+            //trace_log("non restricted");
             $list = ConfigImport::where('model', '=', $this->logeable_type)->lists('name', 'id');
         } else if ($user->hasAccess('waka.importexport.imp.restricted')) {
-            trace_log("restricted");
+            //trace_log("restricted");
             //trace_log($user->id);
             $list = ConfigImport::where('model', '=', $this->logeable_type)
                 ->whereHas('users', function ($query) use ($user) {

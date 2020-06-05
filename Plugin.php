@@ -58,7 +58,7 @@ class Plugin extends PluginBase
          */
         Event::listen('backend.top.index', function ($controller) {
             $user = \BackendAuth::getUser();
-            trace_log($user->hasAccess('waka.importexport.impexp.*'));
+            //trace_log($user->hasAccess('waka.importexport.impexp.*'));
 
             if (!$user->hasAccess('waka.importExport.imp.*')) {
                 return;
