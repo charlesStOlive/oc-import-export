@@ -58,12 +58,13 @@ class Plugin extends PluginBase
          */
         Event::listen('backend.top.index', function ($controller) {
             $user = \BackendAuth::getUser();
-            //trace_log($user->hasAccess('waka.importexport.impexp.*'));
+            //trace_log($user->hasAccess('waka.importexport.imp.*'));
 
-            if (!$user->hasAccess('waka.importExport.imp.*')) {
+            if (!$user->hasAccess('waka.importexport.imp.*')) {
+                //trace_log("false");
                 return;
             }
-
+            //trace_log("ok");
             if (in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
                 $data = [
                     'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
@@ -74,7 +75,7 @@ class Plugin extends PluginBase
         });
         Event::listen('backend.top.index', function ($controller) {
             $user = \BackendAuth::getUser();
-            if (!$user->hasAccess('waka.importExport.exp.*')) {
+            if (!$user->hasAccess('waka.importexport.exp.*')) {
                 return;
             }
             if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
