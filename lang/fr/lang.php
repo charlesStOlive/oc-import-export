@@ -12,6 +12,12 @@ return [
         'logs_description' => "Liste de tous les imports et exports",
         'category' => 'Wakaari Import',
     ],
+    'popup' => [
+        "all" => "Tout",
+        "filtered" => "Liste filtrée",
+        "checked" => "Lignes cochées",
+        "choose_type" => "Que voulez vous exporter ?",
+    ],
     'comon' => [
         'name' => "Nom de l'import",
         'model' => "Model cible",

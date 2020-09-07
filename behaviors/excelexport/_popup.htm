@@ -10,6 +10,27 @@
 <input type="hidden" name="logeable_type" value="<?= $model ?>" />
 
 <div class="modal-body">
+    <div class="radio-field inline-options">
+        <label><?=Lang::get("waka.importexport::lang.popup.choose_type")?></label>
+
+        <div class="radio custom-radio">
+            <input name="exportType" value="1" type="radio" id="all">
+            <label for="all"><?=Lang::get("waka.importexport::lang.popup.all")?></label>
+            <p class="help-block">Nombre : <?=$all?></p>
+        </div>
+        <div class="radio custom-radio">
+            <input checked="checked" name="exportType" value="2" type="radio" id="filtered">
+            <label for="filtered"><?=Lang::get("waka.importexport::lang.popup.filtered")?></label>
+            <p class="help-block">Nombre : <?=$filtered?></p>
+        </div>
+        <?php if($countCheck) : ?>
+        <div class="radio custom-radio">
+            <input name="exportType" value="2" type="radio" id="checked">
+            <label for="checked"><?=Lang::get("waka.importexport::lang.popup.checked")?></label>
+            <p class="help-block">Nombre : <?=$countCheck?></p>
+        </div>
+        <?php endIf ?>
+    </div>
     <?= $ExportPopupWidget->render() ?>
 </div>
 
