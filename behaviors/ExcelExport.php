@@ -23,7 +23,6 @@ class ExcelExport extends ControllerBehavior
         $widget = $lists[0] ?? reset($lists);
         $query = $widget->prepareQuery();
         $results = $query->get();
-        trace_log($query->count());
 
         $checkedIds = post('checked');
 
