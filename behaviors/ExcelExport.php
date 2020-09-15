@@ -2,6 +2,7 @@
 
 use Backend\Classes\ControllerBehavior;
 use Excel;
+use Lang;
 use Redirect;
 use Session;
 use Waka\ImportExport\Models\ConfigExport;
@@ -54,14 +55,38 @@ class ExcelExport extends ControllerBehavior
 
     public function onExportValidation()
     {
-        $controllerUrl = post('controllerUrl') . '/';
+        $errors = $this->CheckValidation(\Input::all());
+        if ($errors) {
+            throw new \ValidationException(['error' => $errors]);
+        }
 
-        $data = $this->ExportPopupWidget->getSaveData();
+        $controllerUrl = post('controllerUrl') . '/';
         $exportType = post('exportType');
-        $configExportId = $data['logeable_id'];
+        $configExportId = post('export_array.logeable_id');
 
         //return Redirect::to('backend/waka/crsm/regions/makeexcel/' . $configExportId . '/' . $exportType);
         return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
+    }
+
+    public function CheckValidation($inputs)
+    {
+        $rules = [
+            'export_array.logeable_id' => 'required',
+            'exportType' => 'required',
+        ];
+
+        $messages = [
+            'export_array.logeable_id.required' => Lang::get("waka.importexport::lang.errors.logeable_id"),
+            'exportType.wakaPdfId' => Lang::get("waka.importexport::lang.errors.exportType"),
+        ];
+
+        $validator = \Validator::make($inputs, $rules, $messages);
+
+        if ($validator->fails()) {
+            return $validator->messages()->first();
+        } else {
+            return false;
+        }
     }
     public function makeTempexcel($id, $exportType)
     {

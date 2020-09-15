@@ -51,4 +51,8 @@ return [
         'logeable_placeholder' => '--Choisissez--',
         'excel_file' => 'Importer une feuille excel',
     ],
+    'errors' => [
+        'logeable_id' => "Vous devez choisir un export",
+        "exportType" => "Le type d'export est manquant",
+    ],
 ];
