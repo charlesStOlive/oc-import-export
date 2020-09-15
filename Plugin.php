@@ -51,7 +51,8 @@ class Plugin extends PluginBase
         /**
          * INJECTOR
          */
-        \Waka\ImportExport\Injectors\ConfigImportExportBackendUser::inject();
+        //Abandon de cet injector au profit du principe de scope
+        //\Waka\ImportExport\Injectors\ConfigImportExportBackendUser::inject();
 
         /**
          * EVENT FOR BUTTON

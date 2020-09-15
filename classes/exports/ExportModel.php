@@ -1,16 +1,17 @@
 <?php namespace Waka\ImportExport\Classes\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Session;
-use \Waka\ImportExport\Models\ConfigExport;
 
-class ExportModel implements FromCollection, WithEvents, WithStrictNullComparison, WithHeadings
+class ExportModel implements FromCollection, WithStrictNullComparison, WithHeadings
 {
     public $parser;
+
+    public function __construct($configExport, $listId = null)
+    {
+        $this->parser = new YamlExcel($configExport, $listId);
+    }
 
     public function headings(): array
     {
@@ -21,18 +22,18 @@ class ExportModel implements FromCollection, WithEvents, WithStrictNullCompariso
     {
         return $this->parser->export();
     }
-    public function registerEvents(): array
-    {
-        return [
-            // Handle by a closure.
-            BeforeExport::class => function (BeforeExport $event) {
-                $configExportId = Session::pull('excel.configExportId');
-                $configExport = ConfigExport::find($configExportId);
-                $listId = Session::pull('modelImportExportLog.listId');
-                //trace_log("listId in export model");
-                //trace_log($listId);
-                $this->parser = new YamlExcel($configExport, $listId);
-            },
-        ];
-    }
+    // public function registerEvents(): array
+    // {
+    //     return [
+    //         // Handle by a closure.
+    //         BeforeExport::class => function (BeforeExport $event) {
+    //             $configExportId = Session::pull('excel.configExportId');
+    //             $configExport = ConfigExport::find($configExportId);
+    //             $listId = Session::pull('modelImportExportLog.listId');
+    //             //trace_log("listId in export model");
+    //             //trace_log($listId);
+    //             $this->parser = new YamlExcel($configExport, $listId);
+    //         },
+    //     ];
+    // }
 }

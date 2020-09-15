@@ -7,7 +7,6 @@ fields:
         label: waka.importexport::lang.importexportlog.logeable
         placeholder: waka.importexport::lang.importexportlog.logeable_placeholder
         type: dropdown
-        options: listExport
     _info:
         type: commentfield
         mode: dynamic

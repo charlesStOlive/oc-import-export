@@ -37,7 +37,7 @@ class ConfigImport extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = [];
+    protected $jsonable = ['scopes'];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
@@ -62,9 +62,8 @@ class ConfigImport extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [
-        'users' => ['Backend\Models\User', 'table' => 'waka_configimports_users'],
+    public $belongsTo = [
+        'data_source' => 'Waka\Utils\Models\DataSource',
     ];
     public $morphTo = [];
     public $morphOne = [];

@@ -9,17 +9,16 @@ tabs:
         name:
             label: waka.importexport::lang.comon.name
             span: auto
-        model:
-            label: waka.importexport::lang.comon.model
-            span: auto
+        data_source:
+            label: waka.utils::lang.datasource.title
+            placeholder: waka.utils::lang.datasource.placeholder
+            type: relation
+            select: name
+            span: auto 
         is_editable:
             label: waka.importexport::lang.comon.is_editable
             type: checkbox
             default: true
-            trigger:
-                action: show
-                field: is_editable
-                condition: checked
         import_model_class:
             label: waka.importexport::lang.comon.import_model_class
             trigger:
@@ -30,16 +29,32 @@ tabs:
             label: waka.importexport::lang.comon.config
             type: codeeditor
             language: yaml
+            trigger:
+                action: hide
+                field: is_editable
+                condition: unchecked
         comment:
             label: waka.importexport::lang.comon.comment
             type: richeditor
             toolbarButtons: bold|italic|underline|strikeThrough|formatOL|formatUL
-        use_batch:
-            label: waka.importexport::lang.comon.use_batch
-            type: checkbox
+        
 
-        userS@update:
-            label: Accès utilisateurs
-            tab: users
-            type: partial
-            path: $/waka/importexport/controllers/configexports/_field_users.htm
+        is_scope: 
+            label: waka.utils::lang.scopes.is_scope
+            type: checkbox
+        scopes:
+            type: scopeslist
+            trigger:
+                action: hide
+                field: is_scope
+                condition: unchecked
+
+        # use_batch:
+        #     label: waka.importexport::lang.comon.use_batch
+        #     type: checkbox
+
+        # userS@update:
+        #     label: Accès utilisateurs
+        #     tab: users
+        #     type: partial
+        #     path: $/waka/importexport/controllers/configexports/_field_users.htm

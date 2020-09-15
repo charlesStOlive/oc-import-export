@@ -36,7 +36,12 @@ class ExcelExport extends ControllerBehavior
         Session::put('modelImportExportLog.checkedIds', $checkedIds);
         //
         $model = post('model');
-        Session::put('modelImportExportLog.targetModel', $model);
+
+        $dataSource = $this->getDataSourceFromModel($model);
+        //trace_log($dataSource->name);
+        $options = $dataSource->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
+
+        $this->ExportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
         $this->vars['model'] = $model;
         $this->vars['all'] = $model::count();
@@ -49,20 +54,11 @@ class ExcelExport extends ControllerBehavior
     public function onExportValidation()
     {
         $data = $this->ExportPopupWidget->getSaveData();
-        // $sessionKey = \Input::get('_session_key');
-        // $iel = new \Waka\ImportExport\Models\ImportExportLog;
-        // $iel->fill($data);
-        // $iel->logeable_type = post('logeable_type');
+        $exportType = post('exportType');
         $configExportId = $data['logeable_id'];
-        // $file = $iel
-        //     ->excel_file()
-        //     ->withDeferred($sessionKey) // how to get this session key dynamically?
-        //     ->first();
-        //le fichier est maintenant prêt à être traité.
-        //$configExportId = post('logeable_id');
-        return Redirect::to('backend/waka/crsm/contacts/makeexcel/' . $configExportId);
+        return Redirect::to('backend/waka/crsm/contacts/makeexcel/' . $configExportId . '/' . $exportType);
     }
-    public function makeTempexcel($id)
+    public function makeTempexcel($id, $exportType)
     {
         $configExportId = 1;
         $configExport = ConfigExport::find($configExportId);
@@ -70,18 +66,32 @@ class ExcelExport extends ControllerBehavior
         return Excel::download(new $configExport->type->class, 'test.xlsx');
     }
 
-    public function makeexcel($id)
+    public function makeexcel($configExportId, $exportType)
     {
-        $configExportId = $id;
         $configExport = ConfigExport::find($configExportId);
-        Session::put('excel.configExportId', $configExportId);
+
+        //Gestion de la liste avec la session
+        $listId = null;
+        if ($exportType == 'filtered') {
+            $listId = Session::get('modelImportExportLog.listId');
+            Session::forget('modelImportExportLog.checkedIds');
+
+        } elseif ($exportType == 'checked') {
+            $listId = Session::get('modelImportExportLog.checkedIds');
+
+        }
+        Session::forget('modelImportExportLog.listId');
+        Session::forget('modelImportExportLog.checkedIds');
+
         if ($configExport->is_editable) {
-            return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel, 'test.xlsx');
+            return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel($configExport, $listId), 'test.xlsx');
         } else {
             if (!$configExport->import_model_class) {
                 throw new \SystemException('import_model_class manqunt dans configexport');
             }
-            return Excel::download(new $configExport->import_model_class, 'test.xlsx');
+            $classExcel = new \ReflectionClass($configExport->import_model_class);
+
+            return Excel::download($classExcel->newInstanceArgs([$listId]), 'test.xlsx');
         }
         //return Excel::download(new $configExport->type->class, 'test.xlsx');
 
@@ -90,11 +100,18 @@ class ExcelExport extends ControllerBehavior
     public function createExportPopupWidget()
     {
         $config = $this->makeConfig('$/waka/importexport/models/importexportlog/fields_popup_export.yaml');
-        $config->alias = 'exportformWidget';
+        $config->alias = 'exportExcelformWidget';
         $config->arrayName = 'export_array';
         $config->model = new \Waka\ImportExport\Models\ImportExportLog;
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
+    }
+
+    public function getDataSourceFromModel(String $model)
+    {
+        $modelClassDecouped = explode('\\', $model);
+        $modelClassName = array_pop($modelClassDecouped);
+        return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
     }
 }

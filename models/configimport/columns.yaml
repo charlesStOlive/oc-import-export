@@ -5,10 +5,15 @@
 columns:
     name:
         label: waka.importexport::lang.comon.name
-    model:
-        label: waka.importexport::lang.comon.model
+    data_source_name:
+        label: waka.utils::lang.datasource.name
+        relation: data_source
+        select: name
     is_editable:
         label: waka.importexport::lang.comon.is_editable
+        type: switch
+    is_scope:
+        label: waka.utils::lang.scopes.is_scope
         type: switch
     updated_at:
         label: waka.utils::lang.global.updated_at

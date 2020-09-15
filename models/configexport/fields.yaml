@@ -9,9 +9,12 @@ tabs:
         name:
             label: waka.importexport::lang.comon.name
             span: auto
-        model:
-            label: waka.importexport::lang.comon.model
-            span: auto
+        data_source:
+            label: waka.utils::lang.datasource.title
+            placeholder: waka.utils::lang.datasource.placeholder
+            type: relation
+            select: name
+            span: auto 
         is_editable:
             label: waka.importexport::lang.comon.is_editable
             type: checkbox
@@ -36,12 +39,23 @@ tabs:
             label: waka.importexport::lang.comon.comment
             type: richeditor
             toolbarButtons: bold|italic
-        use_batch:
-            label: waka.importexport::lang.comon.use_batch
+        # use_batch:
+        #     label: waka.importexport::lang.comon.use_batch
+        #     type: checkbox
+
+        is_scope: 
+            label: waka.utils::lang.scopes.is_scope
             type: checkbox
+    
+        scopes:
+            type: scopeslist
+            trigger:
+                action: hide
+                field: is_scope
+                condition: unchecked
         
-        userS@update:
-            label: Accès utilisateurs
-            tab: users
-            type: partial
-            path: $/waka/importexport/controllers/configexports/_field_users.htm
+        # userS@update:
+        #     label: Accès utilisateurs
+        #     tab: users
+        #     type: partial
+        #     path: $/waka/importexport/controllers/configexports/_field_users.htm

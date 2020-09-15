@@ -14,18 +14,18 @@
         <label><?=Lang::get("waka.importexport::lang.popup.choose_type")?></label>
 
         <div class="radio custom-radio">
-            <input name="exportType" value="1" type="radio" id="all">
+            <input name="exportType" value="all" type="radio" id="all">
             <label for="all"><?=e(trans("waka.importexport::lang.popup.all"))?></label>
             <p class="help-block">Nombre : <?=$all?></p>
         </div>
         <div class="radio custom-radio">
-            <input checked="checked" name="exportType" value="2" type="radio" id="filtered">
+            <input checked="checked" name="exportType" value="filtered" type="radio" id="filtered">
             <label for="filtered"><?=e(trans("waka.importexport::lang.popup.filtered"))?></label>
             <p class="help-block">Nombre : <?=$filtered?></p>
         </div>
         <?php if($countCheck) : ?>
         <div class="radio custom-radio">
-            <input name="exportType" value="2" type="radio" id="checked">
+            <input name="exportType" value="checked" type="radio" id="checked">
             <label for="checked"><?=e(trans("waka.importexport::lang.popup.checked"))?></label>
             <p class="help-block">Nombre : <?=$countCheck?></p>
         </div>

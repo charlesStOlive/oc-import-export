@@ -7,7 +7,6 @@ fields:
         label: waka.importexport::lang.comon.type
         placeholder: waka.importexport::lang.comon.type_placeholder
         type: dropdown
-        options: listImportTypes
     excel_file:
         label: waka.importexport::lang.importexportlog.type
         type: fileupload

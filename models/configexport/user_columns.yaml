@@ -2,14 +2,14 @@
 #  List Column Definitions
 # ===================================
 
-columns:
-    first_name:
-        label: waka.importexport::lang.user.first_name
+# columns:
+#     first_name:
+#         label: waka.importexport::lang.user.first_name
 
-    last_name:
-        label: waka.importexport::lang.user.last_name
+#     last_name:
+#         label: waka.importexport::lang.user.last_name
 
-    hisrole:
-        label: waka.importexport::lang.user.role
-        relation: role
-        select: name
+#     hisrole:
+#         label: waka.importexport::lang.user.role
+#         relation: role
+#         select: name
