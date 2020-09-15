@@ -43,6 +43,7 @@ class ExcelExport extends ControllerBehavior
 
         $this->ExportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
+        $this->vars['controllerUrl'] = $dataSource->controllerUrl;
         $this->vars['model'] = $model;
         $this->vars['all'] = $model::count();
         $this->vars['filtered'] = $query->count();
@@ -53,23 +54,28 @@ class ExcelExport extends ControllerBehavior
 
     public function onExportValidation()
     {
+        $controllerUrl = post('controllerUrl') . '/';
+
         $data = $this->ExportPopupWidget->getSaveData();
         $exportType = post('exportType');
         $configExportId = $data['logeable_id'];
-        return Redirect::to('backend/waka/crsm/contacts/makeexcel/' . $configExportId . '/' . $exportType);
+
+        //return Redirect::to('backend/waka/crsm/regions/makeexcel/' . $configExportId . '/' . $exportType);
+        return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
     }
     public function makeTempexcel($id, $exportType)
     {
+
         $configExportId = 1;
         $configExport = ConfigExport::find($configExportId);
         Session::put('excel.configExportId', $configExportId);
-        return Excel::download(new $configExport->type->class, 'test.xlsx');
+        return Excel::download(new $configExport->type->class, str_slug($configExport->name));
     }
 
     public function makeexcel($configExportId, $exportType)
     {
         $configExport = ConfigExport::find($configExportId);
-
+        //trace_log(str_slug($configExport->name) . 'xlsx');
         //Gestion de la liste avec la session
         $listId = null;
         if ($exportType == 'filtered') {
@@ -84,14 +90,14 @@ class ExcelExport extends ControllerBehavior
         Session::forget('modelImportExportLog.checkedIds');
 
         if ($configExport->is_editable) {
-            return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel($configExport, $listId), 'test.xlsx');
+            return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel($configExport, $listId), str_slug($configExport->name) . '.xlsx');
         } else {
             if (!$configExport->import_model_class) {
                 throw new \SystemException('import_model_class manqunt dans configexport');
             }
             $classExcel = new \ReflectionClass($configExport->import_model_class);
 
-            return Excel::download($classExcel->newInstanceArgs([$listId]), 'test.xlsx');
+            return Excel::download($classExcel->newInstanceArgs([$listId]), str_slug($configExport->name) . '.xlsx');
         }
         //return Excel::download(new $configExport->type->class, 'test.xlsx');
 
