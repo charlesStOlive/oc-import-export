@@ -50,6 +50,8 @@ return [
         'logeable' => 'Choisissez un type',
         'logeable_placeholder' => '--Choisissez--',
         'excel_file' => 'Importer une feuille excel',
+        "use_queue" => "Utilisr les taches serveurs.",
+        "use_queue_com" => "Fortement consillé si le fichier dépasse 250Ko",
     ],
     'errors' => [
         'logeable_id' => "Vous devez choisir un export",

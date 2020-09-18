@@ -49,19 +49,29 @@ class ExcelImport extends ControllerBehavior
         //le fichier est maintenant prêt à être traité.
         //$iel->save();
         $configImportId = $data['logeable_id'];
+        $useQueue = $data['use_queue'];
         // trace_log(post('logeable_id'));
         // trace_log($data);
-
-        $configImport = ConfigImport::find($configImportId);
-        if ($configImport->is_editable) {
-            Excel::import(new \Waka\ImportExport\Classes\Imports\ImportModel($configImport), $file->getDiskPath());
+        if ($useQueue) {
+            trace_log("queue");
+            $datas = [
+                'configImportId' => $configImportId,
+                'file_path' => $file->getDiskPath(),
+            ];
+            $jobId = \Queue::push('\Waka\ImportExport\Classes\Queue\QueueExcel@import', $datas);
+            \Event::fire('job.create.imp', [$jobId, 'Import en attente ']);
         } else {
-            if (!$configImport->import_model_class) {
-                throw new \SystemException('import_model_class manqunt dans configexport');
+            $configImport = ConfigImport::find($configImportId);
+            if ($configImport->is_editable) {
+                Excel::import(new \Waka\ImportExport\Classes\Imports\ImportModel($configImport), $file->getDiskPath());
+            } else {
+                if (!$configImport->import_model_class) {
+                    throw new \SystemException('import_model_class manqunt dans configexport');
+                }
+                Excel::import(new $configImport->import_model_class, $file->getDiskPath());
             }
-            Excel::import(new $configImport->import_model_class, $file->getDiskPath());
         }
-        //Excel::import(new $configImport->type->class, $file->getDiskPath());
+
         return Redirect::refresh();
     }
 

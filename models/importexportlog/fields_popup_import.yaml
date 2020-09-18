@@ -18,4 +18,8 @@ fields:
         type: fileupload
         mode: file
         dependsOn: logeable_id
+    use_queue:
+        label: waka.importexport::lang.importexportlog.use_queue
+        type: checkbox
+        commentAbove: waka.importexport::lang.importexportlog.use_queue_com
     
