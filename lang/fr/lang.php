@@ -10,7 +10,6 @@ return [
         'types_description' => "Gestion des types d'import ou export",
         'logs_title' => "Logs",
         'logs_description' => "Liste de tous les imports et exports",
-        'category' => 'Wakaari Import',
     ],
     'popup' => [
         "all" => "Tout",
