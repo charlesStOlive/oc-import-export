@@ -1,7 +1,7 @@
 <?php namespace Waka\ImportExport\Classes\Exports;
 
 use Illuminate\Support\Collection;
-use Waka\Utils\Models\DataSource;
+use Waka\Utils\Classes\DataSource;
 use Yaml;
 
 class YamlExcel
@@ -16,7 +16,7 @@ class YamlExcel
     public function __construct($config, $listId = null)
     {
         $this->importer = $config;
-        $this->model = DataSource::find($config->data_source_id)->modelClass;
+        $this->model = DataSource::find($config->data_source_id)->class;
         $this->config = $config->column_list;
         $this->listId = $listId;
     }

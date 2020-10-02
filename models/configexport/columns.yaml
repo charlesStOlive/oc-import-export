@@ -5,10 +5,9 @@
 columns:
     name:
         label: waka.importexport::lang.comon.name
-    datasource_name:
+    data_source_id:
         label: waka.utils::lang.datasource.title
-        relation: data_source
-        select: name
+        type: datasource
     is_editable:
         label: waka.importexport::lang.comon.is_editable
         type: switch

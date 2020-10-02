@@ -63,7 +63,7 @@ class ConfigExport extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'data_source' => 'Waka\Utils\Models\DataSource',
+        // 'data_source' => 'Waka\Utils\Models\DataSource',
     ];
     public $morphTo = [];
     public $morphOne = [];
@@ -72,5 +72,13 @@ class ConfigExport extends Model
     ];
     public $attachOne = [];
     public $attachMany = [];
+
+    /**
+     * LIST
+     */
+    public function listDataSource()
+    {
+        return \Waka\Utils\Classes\DataSourceList::lists();
+    }
 
 }
