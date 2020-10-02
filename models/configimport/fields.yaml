@@ -9,11 +9,11 @@ tabs:
         name:
             label: waka.importexport::lang.comon.name
             span: auto
-        data_source:
+       data_source_id:
             label: waka.utils::lang.datasource.title
             placeholder: waka.utils::lang.datasource.placeholder
-            type: relation
-            select: name
+            type: dropdown
+            options: listDataSource
             span: auto 
         is_editable:
             label: waka.importexport::lang.comon.is_editable

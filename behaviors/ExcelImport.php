@@ -4,6 +4,7 @@ use Backend\Classes\ControllerBehavior;
 use Excel;
 use Redirect;
 use Waka\ImportExport\Models\ConfigImport;
+use Waka\Utils\Classes\DataSource;
 
 class ExcelImport extends ControllerBehavior
 {
@@ -26,8 +27,8 @@ class ExcelImport extends ControllerBehavior
     {
         $model = post('model');
 
-        $dataSource = $this->getDataSourceFromModel($model);
-        $options = $dataSource->getPartialIndexOptions('Waka\ImportExport\Models\ConfigImport');
+        $ds = new DataSource($model, 'class');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
@@ -53,7 +54,7 @@ class ExcelImport extends ControllerBehavior
         // trace_log(post('logeable_id'));
         // trace_log($data);
         if ($useQueue) {
-            trace_log("queue");
+            //trace_log("queue");
             $datas = [
                 'configImportId' => $configImportId,
                 'file_path' => $file->getDiskPath(),
@@ -84,12 +85,5 @@ class ExcelImport extends ControllerBehavior
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
-    }
-
-    public function getDataSourceFromModel(String $model)
-    {
-        $modelClassDecouped = explode('\\', $model);
-        $modelClassName = array_pop($modelClassDecouped);
-        return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
     }
 }

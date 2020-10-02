@@ -22,7 +22,7 @@ class YamlExcel
     public function __construct($config)
     {
         $this->importer = $config;
-        $this->model = DataSource::find($config->data_source_id)->modelClass;
+        $this->model = DataSource::find($config->data_source_id)->class;
         //$this->model = $config->model;
         $this->parse($config->column_list);
 

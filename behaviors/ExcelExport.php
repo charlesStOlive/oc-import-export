@@ -6,6 +6,7 @@ use Lang;
 use Redirect;
 use Session;
 use Waka\ImportExport\Models\ConfigExport;
+use Waka\Utils\Classes\DataSource;
 
 class ExcelExport extends ControllerBehavior
 {
@@ -38,13 +39,12 @@ class ExcelExport extends ControllerBehavior
         //
         $model = post('model');
 
-        $dataSource = $this->getDataSourceFromModel($model);
-        //trace_log($dataSource->name);
-        $options = $dataSource->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
+        $ds = new DataSource($model, 'class');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
 
         $this->ExportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
-        $this->vars['controllerUrl'] = $dataSource->controllerUrl;
+        $this->vars['controllerUrl'] = $ds->controller;
         $this->vars['model'] = $model;
         $this->vars['all'] = $model::count();
         $this->vars['filtered'] = $query->count();
@@ -137,12 +137,5 @@ class ExcelExport extends ControllerBehavior
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
-    }
-
-    public function getDataSourceFromModel(String $model)
-    {
-        $modelClassDecouped = explode('\\', $model);
-        $modelClassName = array_pop($modelClassDecouped);
-        return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
     }
 }
