@@ -27,6 +27,7 @@ return [
         'comment' => 'Information',
         'is_editable' => 'Editable ?',
         'import_model_class' => "Chemin de la classe d'import",
+        "relation" => "Relation",
     ],
     'user' => [
         'first_name' => "Prénom",

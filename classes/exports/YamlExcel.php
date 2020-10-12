@@ -6,17 +6,21 @@ use Yaml;
 
 class YamlExcel
 {
+    use \Waka\Utils\Classes\Traits\StringRelation;
 
     private $importer;
     public $model;
     private $excelCollection;
     public $excelHeaders;
     private $listId;
+    private $parentId;
 
-    public function __construct($config, $listId = null)
+    public function __construct($config, $listId = null, $parentId = null)
     {
         $this->importer = $config;
-        $this->model = DataSource::find($config->data_source_id)->class;
+        $ds = new DataSource($config->data_source_id, 'id');
+        $this->model = $ds->class;
+        $this->parentId = $parentId;
         $this->config = $config->column_list;
         $this->listId = $listId;
     }
@@ -24,13 +28,9 @@ class YamlExcel
     private function prepareVars()
     {
         $fields = $this->getConfig();
+        $models = $this->getFinalModels();
+        trace_log($models->toArray());
 
-        $models;
-        if ($this->listId) {
-            $models = $this->model::whereIn('id', $this->listId)->get();
-        } else {
-            $models = $this->model::get();
-        }
         $excelArray = new Collection();
         foreach ($models as $model) {
             $fieldObjects = [];
@@ -44,10 +44,29 @@ class YamlExcel
     }
     public function getConfig()
     {
-        $rows = Yaml::parse($this->config);
-        $baseModel = $rows['base'];
+        $config = Yaml::parse($this->config);
+        $baseModel = $config['base'];
         //traitement des fields classique
         return $baseModel['fields'];
+
+    }
+    public function getFinalModels()
+    {
+        if ($this->parentId && !$this->importer->relation) {
+            throw new ApplicationException("Erreur configuration l'extraction d'un modèle enfant nécessite un parentId et une relation");
+        }
+        if ($this->parentId && $this->importer->relation) {
+            $this->model = $this->model::find($this->parentId);
+            $finalModel = $this->getStringRequestRelation($this->model, $this->importer->relation);
+            return $finalModel->get();
+        } else {
+            if ($this->listId) {
+                return $this->model::whereIn('id', $this->listId)->get();
+            } else {
+                return $this->model::get();
+            }
+
+        }
 
     }
     public function export()

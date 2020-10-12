@@ -3,24 +3,24 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="popup">×</button>
     <h4 class="modal-title">
-        <?= e(trans('waka.importexport::lang.global.import_title')) ?>
+        <?= e(trans('waka.importexport::lang.global.export_title')) ?>
     </h4>
 </div>
 
 <input type="hidden" name="logeable_type" value="<?= $model ?>" />
 
-<div class="modal-body" data-field-name="logeable">
+<div class="modal-body">
     <?= $ImportPopupWidget->render() ?>
 </div>
 
 <div class="modal-footer">
-    <button type="submit" data-request="onImportValidation" data-request-data="redirect:0" data-popup-load-indicator
-        class="btn btn-primary">
-        <?= e(trans('waka.utils::lang.global.validate')) ?>
+    <button type="submit" data-request="onImportChildValidation" data-request-data="redirect:0, modelId:'<?=$modelId?>'"
+        data-popup-load-indicator class="btn btn-primary">
+        Valider
     </button>
 
     <button type="button" class="btn btn-default" data-dismiss="popup">
-        <?= e(trans('waka.utils::lang.global.close')) ?>
+        Annuler
     </button>
 </div>
 

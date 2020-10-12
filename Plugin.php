@@ -87,6 +87,32 @@ class Plugin extends PluginBase
                 return View::make('waka.importexport::excelexport_popup')->withData($data);;
             }
         });
+        Event::listen('backend.update.prod', function ($controller) {
+            if (get_class($controller) == 'Waka\ImportExport\Controllers\ConfigExports') {
+                return;
+            }
+
+            if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
+                $data = [
+                    'model' => $modelClass = str_replace('\\', '\\\\', get_class($controller->formGetModel())),
+                    'modelId' => $controller->formGetModel()->id,
+                ];
+                return View::make('waka.importexport::excelexport_child_popup')->withData($data);;
+            }
+        });
+        Event::listen('backend.update.prod', function ($controller) {
+            if (get_class($controller) == 'Waka\ImportExport\Controllers\ConfigImports') {
+                return;
+            }
+
+            if (in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
+                $data = [
+                    'model' => $modelClass = str_replace('\\', '\\\\', get_class($controller->formGetModel())),
+                    'modelId' => $controller->formGetModel()->id,
+                ];
+                return View::make('waka.importexport::excelimport_child_popup')->withData($data);;
+            }
+        });
 
     }
 

@@ -19,6 +19,10 @@ tabs:
             label: waka.importexport::lang.comon.is_editable
             type: checkbox
             default: true
+            span: auto
+        relation:
+            label: waka.importexport::lang.comon.relation
+            span: auto
         column_list:
             label: waka.importexport::lang.comon.config
             type: codeeditor

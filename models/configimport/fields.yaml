@@ -9,7 +9,7 @@ tabs:
         name:
             label: waka.importexport::lang.comon.name
             span: auto
-       data_source_id:
+        data_source_id:
             label: waka.utils::lang.datasource.title
             placeholder: waka.utils::lang.datasource.placeholder
             type: dropdown
@@ -19,6 +19,10 @@ tabs:
             label: waka.importexport::lang.comon.is_editable
             type: checkbox
             default: true
+            span: auto
+        relation:
+            label: waka.importexport::lang.comon.relation
+            span: auto
         import_model_class:
             label: waka.importexport::lang.comon.import_model_class
             trigger:

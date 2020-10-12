@@ -8,9 +8,9 @@ class ExportModel implements FromCollection, WithStrictNullComparison, WithHeadi
 {
     public $parser;
 
-    public function __construct($configExport, $listId = null)
+    public function __construct($configExport, $listId = null, $parentId = null)
     {
-        $this->parser = new YamlExcel($configExport, $listId);
+        $this->parser = new YamlExcel($configExport, $listId, $parentId);
     }
 
     public function headings(): array
