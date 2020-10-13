@@ -4,7 +4,7 @@ use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 use Schema;
 
-class CreateConfigImportsTable extends Migration
+class CreateConfigImportsTableU103 extends Migration
 {
 
     public function up()
