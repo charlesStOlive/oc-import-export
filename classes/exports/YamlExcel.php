@@ -29,7 +29,7 @@ class YamlExcel
     {
         $fields = $this->getConfig();
         $models = $this->getFinalModels();
-        trace_log($models->toArray());
+        //trace_log($models->toArray());
 
         $excelArray = new Collection();
         foreach ($models as $model) {

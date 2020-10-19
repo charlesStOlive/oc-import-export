@@ -10,7 +10,7 @@ class ImportModel implements ToCollection, WithHeadingRow
 
     public function __construct($configImport, $parentId = null)
     {
-        trace_log($parentId);
+        //trace_log($parentId);
         $this->parser = new YamlExcel($configImport, $parentId);
     }
     public function collection(Collection $rows)

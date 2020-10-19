@@ -94,7 +94,7 @@ class ExcelImport extends ControllerBehavior
     public function onImportChildValidation()
     {
         $data = $this->ImportPopupWidget->getSaveData();
-        trace_log($this->ImportPopupWidget->getSaveData());
+        //trace_log($this->ImportPopupWidget->getSaveData());
         $sessionKey = \Input::get('_session_key');
         $iel = new \Waka\ImportExport\Models\ImportExportLog;
         $iel->fill($data);
