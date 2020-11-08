@@ -82,7 +82,6 @@ class ExcelExport extends ControllerBehavior
         $exportType = post('exportType');
         $configExportId = post('export_array.logeable_id');
 
-        //return Redirect::to('backend/waka/crsm/regions/makeexcel/' . $configExportId . '/' . $exportType);
         return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
     }
 
@@ -98,7 +97,6 @@ class ExcelExport extends ControllerBehavior
         $exportType = 'child';
         $configExportId = post('export_array.logeable_id');
 
-        //return Redirect::to('backend/waka/crsm/regions/makeexcel/' . $configExportId . '/' . $exportType);
         return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType . '/' . $parentId);
     }
 

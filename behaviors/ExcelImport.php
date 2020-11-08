@@ -20,7 +20,6 @@ class ExcelImport extends ControllerBehavior
     //     $configImportId = 1;
     //     $configImport = ConfigImport::find($configImportId);
     //     Session::put('excel.configImportId', $configImportId);
-    //     Excel::import(new $configImport->type->class, plugins_path('waka/crsm/updates/excels/maj_contact.xlsx'));
     //     return Redirect::refresh();
     // }
     public function onImportPopupForm()
