@@ -14,7 +14,7 @@ class SheetsImport implements WithMultipleSheets
         $settingImports = Settings::get('start_imports');
         $configArray = \Config::get('waka.wconfig::start_data');
 
-        trace_log($configArray);
+        //trace_log($configArray);
 
         $sheetsToImport = [];
         foreach ($settingImports as $key) {
@@ -24,7 +24,7 @@ class SheetsImport implements WithMultipleSheets
             }
 
         }
-        trace_log($sheetsToImport);
+        //trace_log($sheetsToImport);
         return $sheetsToImport;
     }
 }
