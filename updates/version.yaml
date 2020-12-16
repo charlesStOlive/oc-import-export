@@ -1,11 +1,16 @@
+# 1.0.1: 
+#   - 'First version of ImportExport'
+#   - create_config_exports_table.php
+#   - create_config_imports_table.php
+#   - create_import_export_logs_table.php
+# 1.0.2: 
+#   - 'Ajout de la relation dans export'
+#   - create_config_exports_table_u102.php
+# 1.0.3: 
+#   - 'Ajout de la relation dans import'
+#   - create_config_imports_table_u103.php
 1.0.1: 
   - 'First version of ImportExport'
-  - create_config_exports_table.php
-  - create_config_imports_table.php
+  - create_exports_table.php
+  - create_imports_table.php
   - create_import_export_logs_table.php
-1.0.2: 
-  - 'Ajout de la relation dans export'
-  - create_config_exports_table_u102.php
-1.0.3: 
-  - 'Ajout de la relation dans import'
-  - create_config_imports_table_u103.php

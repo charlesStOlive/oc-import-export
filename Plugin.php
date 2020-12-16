@@ -49,12 +49,6 @@ class Plugin extends PluginBase
     public function boot()
     {
         /**
-         * INJECTOR
-         */
-        //Abandon de cet injector au profit du principe de scope
-        //\Waka\ImportExport\Injectors\ConfigImportExportBackendUser::inject();
-
-        /**
          * EVENT FOR BUTTON
          */
         Event::listen('backend.top.index', function ($controller) {
@@ -88,7 +82,7 @@ class Plugin extends PluginBase
             }
         });
         Event::listen('backend.update.prod', function ($controller) {
-            if (get_class($controller) == 'Waka\ImportExport\Controllers\ConfigExports') {
+            if (get_class($controller) == 'Waka\ImportExport\Controllers\Exports') {
                 return;
             }
 
@@ -101,7 +95,7 @@ class Plugin extends PluginBase
             }
         });
         Event::listen('backend.update.prod', function ($controller) {
-            if (get_class($controller) == 'Waka\ImportExport\Controllers\ConfigImports') {
+            if (get_class($controller) == 'Waka\ImportExport\Controllers\Imports') {
                 return;
             }
 
@@ -171,33 +165,33 @@ class Plugin extends PluginBase
     {
 
         return [
-            'configImports' => [
-                'label' => Lang::get('waka.importexport::lang.menu.imports_title'),
-                'description' => Lang::get('waka.importexport::lang.menu.imports_description'),
+            'imports_exports' => [
+                'label' => Lang::get('waka.importexport::lang.menu.impexp_title'),
+                'description' => Lang::get('waka.importexport::lang.menu.impexp_description'),
                 'category' => Lang::get('waka.utils::lang.menu.settings_category_model'),
-                'url' => Backend::url('waka/importexport/configimports'),
-                'icon' => 'icon-caret-square-o-down',
+                'url' => Backend::url('waka/importexport/imports/index/imports'),
+                'icon' => 'icon-table',
                 'permissions' => ['waka.importexport.admin'],
                 'order' => 70,
             ],
-            'configExports' => [
-                'label' => Lang::get('waka.importexport::lang.menu.exports_title'),
-                'description' => Lang::get('waka.importexport::lang.menu.exports_description'),
-                'category' => Lang::get('waka.utils::lang.menu.settings_category_model'),
-                'url' => Backend::url('waka/importexport/configexports'),
-                'icon' => 'icon-caret-square-o-up',
-                'permissions' => ['waka.importexport.admin'],
-                'order' => 72,
-            ],
-            'configImportlogs' => [
-                'label' => Lang::get('waka.importexport::lang.menu.logs_title'),
-                'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
-                'category' => Lang::get('waka.utils::lang.menu.settings_category'),
-                'url' => Backend::url('waka/importexport/types'),
-                'icon' => 'icon-terminal',
-                'permissions' => ['waka.importexport.admin'],
-                'order' => 180,
-            ],
+            // 'configExports' => [
+            //     'label' => Lang::get('waka.importexport::lang.menu.exports_title'),
+            //     'description' => Lang::get('waka.importexport::lang.menu.exports_description'),
+            //     'category' => Lang::get('waka.utils::lang.menu.settings_category_model'),
+            //     'url' => Backend::url('waka/importexport/configexports'),
+            //     'icon' => 'icon-caret-square-o-up',
+            //     'permissions' => ['waka.importexport.admin'],
+            //     'order' => 72,
+            // ],
+            // 'configImportlogs' => [
+            //     'label' => Lang::get('waka.importexport::lang.menu.logs_title'),
+            //     'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
+            //     'category' => Lang::get('waka.utils::lang.menu.settings_category'),
+            //     'url' => Backend::url('waka/importexport/types'),
+            //     'icon' => 'icon-terminal',
+            //     'permissions' => ['waka.importexport.admin'],
+            //     'order' => 180,
+            // ],
         ];
     }
 }

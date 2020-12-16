@@ -5,7 +5,7 @@ use Excel;
 use Lang;
 use Redirect;
 use Session;
-use Waka\ImportExport\Models\ConfigExport;
+use Waka\ImportExport\Models\Export;
 use Waka\Utils\Classes\DataSource;
 
 class ExcelExport extends ControllerBehavior
@@ -40,7 +40,7 @@ class ExcelExport extends ControllerBehavior
         $model = post('model');
 
         $ds = new DataSource($model, 'class');
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export');
 
         $this->ExportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
@@ -60,7 +60,7 @@ class ExcelExport extends ControllerBehavior
         $modelId = post('modelId');
 
         $ds = new DataSource($model, 'class');
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport', true);
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
 
         $this->ExportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
@@ -142,14 +142,14 @@ class ExcelExport extends ControllerBehavior
     {
 
         $configExportId = 1;
-        $configExport = ConfigExport::find($configExportId);
+        $configExport = Export::find($configExportId);
         Session::put('excel.configExportId', $configExportId);
         return Excel::download(new $configExport->type->class, str_slug($configExport->name));
     }
 
     public function makeexcel($configExportId, $exportType, $parentId = null)
     {
-        $configExport = ConfigExport::find($configExportId);
+        $configExport = Export::find($configExportId);
         //trace_log(str_slug($configExport->name) . 'xlsx');
         //Gestion de la liste avec la session
         $listId = null;

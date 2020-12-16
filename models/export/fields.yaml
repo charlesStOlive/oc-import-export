@@ -1,0 +1,72 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:    
+    name:
+        label: waka.importexport::export.name
+        span: left
+        required: true
+        commentAbove: waka.importexport::export.name_com
+    data_source_id:
+        label: waka.importexport::export.data_source_id
+        span: right
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        required: true
+        options: listDataSource
+        readOnly: true
+        commentAbove: waka.importexport::export.data_source_id_com
+    relation:
+        label: waka.importexport::export.relation
+        span: right
+        trigger:
+            action: show
+            field: for_relation
+            condition: checked
+    for_relation:
+        label: waka.importexport::export.for_relation
+        span: left
+        type: switch
+    is_editable:
+        label: waka.importexport::export.is_editable
+        span: left
+        type: switch
+    export_model_class:
+        label: waka.importexport::export.export_model_class
+        span: left
+        trigger:
+            action: hide
+            field: is_editable
+            condition: checked
+    column_list:
+        label: waka.importexport::export.column_list
+        span: full
+        type: codeeditor
+        size: giant
+        language: yaml
+        trigger:
+            action: show
+            field: is_editable
+            condition: checked
+    comment:
+        label: waka.importexport::export.comment
+        span: full
+        type: textarea
+    is_scope:
+        label: waka.importexport::export.is_scope
+        span: left
+        type: switch
+    scopes:
+        label: waka.importexport::export.scopes
+        span: full
+        type: scopeslist
+        trigger:
+            action: show
+            field: is_scope
+            condition: checked
+    use_batch:
+        label: waka.importexport::export.use_batch
+        span: auto
+        type: switch
+        commentAbove: waka.importexport::export.use_batch_com

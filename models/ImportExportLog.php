@@ -123,12 +123,12 @@ class ImportExportLog extends Model
     // }
     public function getCommentImportAttribute()
     {
-        $comment = ConfigImport::find($this->logeable_id)->comment ?? null;
+        $comment = Import::find($this->logeable_id)->comment ?? null;
         return $comment;
     }
     public function getCommentExportAttribute()
     {
-        $comment = ConfigExport::find($this->logeable_id)->comment ?? null;
+        $comment = Export::find($this->logeable_id)->comment ?? null;
         return $comment;
     }
 

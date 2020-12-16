@@ -1,0 +1,30 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+
+    name:
+        label: waka.importexport::export.name
+        searchable: true
+    data_source_id:
+        label: waka.importexport::export.data_source_id
+        searchable: true
+    for_relation:
+        label: waka.importexport::export.for_relation
+        type: switch
+    is_editable:
+        label: waka.importexport::export.is_editable
+        type: switch
+    export_model_class:
+        label: waka.importexport::export.export_model_class
+        searchable: true
+    is_scope:
+        label: waka.importexport::export.is_scope
+        type: switch
+    use_batch:
+        label: waka.importexport::export.use_batch
+        type: switch
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: timetense

@@ -2,10 +2,8 @@
 
 return [
     'menu' => [
-        'imports_title' => 'Import',
-        'imports_description' => 'Gestion des imports',
-        'exports_title' => 'Export',
-        'exports_description' => 'Gestion des exports',
+        'impexp_title' => 'Imports & Exports',
+        'impexp_description' => 'Gestion des imports et des exports',
         'types_title' => "Types",
         'types_description' => "Gestion des types d'import ou export",
         'logs_title' => "Logs",

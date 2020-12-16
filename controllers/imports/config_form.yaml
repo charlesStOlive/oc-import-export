@@ -1,0 +1,32 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: waka.importexport::import.form_name
+
+# Model Form Field configuration
+form: $/waka/importexport/models/import/fields.yaml
+
+# Model Class name
+modelClass: Waka\ImportExport\Models\Import
+
+# Default redirect location
+defaultRedirect: waka/importexport/imports/index/imports
+
+# Create page
+create:
+    title: waka.importexport::import.create
+    redirect: waka/importexport/imports/update/:id
+    redirectClose: waka/importexport/imports/index/imports
+    form: $/waka/importexport/models/import/fields_create.yaml
+
+# Update page
+update:
+    title: waka.importexport::import.update
+    redirect: waka/importexport/imports/index/imports
+    redirectClose: waka/importexport/imports/index/imports
+
+# Preview page
+preview:
+    title: waka.importexport::import.preview_name

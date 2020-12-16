@@ -1,0 +1,25 @@
+<div class="control-tabs content-tabs tabs-flush"
+     data-control="tab">
+    <ul class="nav nav-tabs">
+        <li class="<?= $activeTab == 'imports' ? 'active' : '' ?>">
+            <a href="#imports"
+               data-tab-url="<?= Backend::url('waka/importexport/imports/index/imports') ?>">
+                <?= e(trans('waka.importexport::import.title')) ?>
+            </a>
+        </li>
+        <li class="<?= $activeTab == 'exports' ? 'active' : '' ?>">
+            <a href="#exports"
+               data-tab-url="<?= Backend::url('waka/importexport/imports/index/exports') ?>">
+                <?= e(trans('waka.importexport::export.title')) ?>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane <?= $activeTab == 'imports' ? 'active' : '' ?>">
+            <?= $this->listRender('imports') ?>
+        </div>
+        <div class="tab-pane <?= $activeTab == 'exports' ? 'active' : '' ?>">
+            <?= $this->listRender('exports') ?>
+        </div>
+    </div>
+</div>

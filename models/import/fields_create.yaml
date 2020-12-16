@@ -1,0 +1,57 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:    
+    name:
+        label: waka.importexport::import.name
+        span: left
+        required: true
+        commentAbove: waka.importexport::import.name_com
+    data_source_id:
+        label: waka.importexport::import.data_source_id
+        span: right
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        required: true
+        options: listDataSource
+        commentAbove: waka.importexport::import.data_source_id_com
+    for_relation:
+        label: waka.importexport::import.for_relation
+        span: left
+        type: switch
+    relation:
+        label: waka.importexport::import.relation
+        span: right
+        trigger:
+            action: show
+            field: for_relation
+            condition: checked
+    is_editable:
+        label: waka.importexport::import.is_editable
+        span: left
+        type: switch
+    import_model_class:
+        label: waka.importexport::import.import_model_class
+        span: left
+        trigger:
+            action: hide
+            field: is_editable
+            condition: checked
+    column_list:
+        label: waka.importexport::import.column_list
+        span: full
+        type: codeeditor
+        trigger:
+            action: show
+            field: is_editable
+            condition: checked
+    comment:
+        label: waka.importexport::import.comment
+        span: full
+        type: textarea
+    use_batch:
+        label: waka.importexport::import.use_batch
+        span: auto
+        type: switch
+        commentAbove: waka.importexport::import.use_batch_com

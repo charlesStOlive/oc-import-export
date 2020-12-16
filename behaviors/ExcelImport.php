@@ -3,7 +3,7 @@
 use Backend\Classes\ControllerBehavior;
 use Excel;
 use Redirect;
-use Waka\ImportExport\Models\ConfigImport;
+use Waka\ImportExport\Models\Import;
 use Waka\Utils\Classes\DataSource;
 
 class ExcelImport extends ControllerBehavior
@@ -18,7 +18,7 @@ class ExcelImport extends ControllerBehavior
     // public function onImport()
     // {
     //     $configImportId = 1;
-    //     $configImport = ConfigImport::find($configImportId);
+    //     $configImport = Import::find($configImportId);
     //     Session::put('excel.configImportId', $configImportId);
     //     return Redirect::refresh();
     // }
@@ -27,7 +27,7 @@ class ExcelImport extends ControllerBehavior
         $model = post('model');
 
         $ds = new DataSource($model, 'class');
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigExport');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import');
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
@@ -41,7 +41,7 @@ class ExcelImport extends ControllerBehavior
         $modelId = post('modelId');
 
         $ds = new DataSource($model, 'class');
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\ConfigImport', true);
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
@@ -76,7 +76,7 @@ class ExcelImport extends ControllerBehavior
             $jobId = \Queue::push('\Waka\ImportExport\Classes\Queue\QueueExcel@import', $datas);
             \Event::fire('job.create.imp', [$jobId, 'Import en attente ']);
         } else {
-            $configImport = ConfigImport::find($configImportId);
+            $configImport = Import::find($configImportId);
             if ($configImport->is_editable) {
                 Excel::import(new \Waka\ImportExport\Classes\Imports\ImportModel($configImport), $file->getDiskPath());
             } else {
@@ -117,7 +117,7 @@ class ExcelImport extends ControllerBehavior
             $jobId = \Queue::push('\Waka\ImportExport\Classes\Queue\QueueExcel@import', $datas);
             \Event::fire('job.create.imp', [$jobId, 'Import en attente ']);
         } else {
-            $configImport = ConfigImport::find($configImportId);
+            $configImport = Import::find($configImportId);
             if ($configImport->is_editable) {
                 Excel::import(new \Waka\ImportExport\Classes\Imports\ImportModel($configImport, $parentId), $file->getDiskPath());
             } else {
