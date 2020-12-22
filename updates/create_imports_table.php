@@ -12,7 +12,7 @@ class CreateImportsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->integer('data_source_id');
+            $table->string('data_source');
             $table->boolean('is_editable')->nullable();
             $table->string('import_model_class')->nullable();
             $table->boolean('for_relation')->nullable();

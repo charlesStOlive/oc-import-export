@@ -13,7 +13,7 @@ class ExportsImport implements ToCollection, WithHeadingRow
             $export = new Export();
             $export->id = $row['id'] ?? null;
             $export->name = $row['name'] ?? null;
-            $export->data_source_id = $row['data_source_id'] ?? null;
+            $export->data_source = $row['data_source'] ?? null;
             $export->is_editable = $row['is_editable'] ?? null;
             $export->export_model_class = $row['export_model_class'] ?? null;
             $export->for_relation = $row['for_relation'] ?? null;

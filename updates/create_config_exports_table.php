@@ -12,7 +12,7 @@ class CreateConfigExportsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->integer('data_source_id')->unsigned()->nullable();
+            $table->string('data_source')->nullable();
             $table->string('import_model_class')->nullable();
             $table->boolean('is_editable')->default(true);
             $table->text('column_list');

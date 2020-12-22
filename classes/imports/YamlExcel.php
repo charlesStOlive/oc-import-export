@@ -26,7 +26,7 @@ class YamlExcel
     {
         $this->importer = $config;
         $this->parentId = $parentId;
-        $ds = new DataSource($config->data_source_id, 'id');
+        $ds = new DataSource($config->data_source);
         $this->setFinalModels($ds->class);
         //$this->model = $config->model;
         $this->parse($config->column_list);

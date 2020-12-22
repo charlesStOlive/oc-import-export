@@ -3,8 +3,8 @@
 return [
     'name' => 'libellé de l’import',
     'name_com' => 'interne uniquement',
-    'data_source_id' => 'Source de données',
-    'data_source_id_com' => 'la source de wconfig',
+    'data_source' => 'Source de données',
+    'data_source_com' => 'la source de wconfig',
     'is_editable' => 'Éditable ?',
     'import_model_class' => 'Nom de la classe d&#039;import',
     'for_relation' => 'Pour une relation ? ',

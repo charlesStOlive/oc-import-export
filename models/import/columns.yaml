@@ -7,8 +7,8 @@ columns:
     name:
         label: waka.importexport::import.name
         searchable: true
-    data_source_id:
-        label: waka.importexport::import.data_source_id
+    data_source:
+        label: waka.importexport::import.data_source
         searchable: true
     for_relation:
         label: waka.importexport::import.for_relation

@@ -8,14 +8,14 @@ fields:
         span: left
         required: true
         commentAbove: waka.importexport::export.name_com
-    data_source_id:
-        label: waka.importexport::export.data_source_id
+    data_source:
+        label: waka.importexport::export.data_source
         span: right
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
         options: listDataSource
-        commentAbove: waka.importexport::export.data_source_id_com
+        commentAbove: waka.importexport::export.data_source_com
     for_relation:
         label: waka.importexport::export.for_relation
         span: left

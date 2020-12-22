@@ -13,7 +13,7 @@ class ImportsImport implements ToCollection, WithHeadingRow
             $import = new Import();
             $import->id = $row['id'] ?? null;
             $import->name = $row['name'] ?? null;
-            $import->data_source_id = $row['data_source_id'] ?? null;
+            $import->data_source = $row['data_source'] ?? null;
             $import->is_editable = $row['is_editable'] ?? null;
             $import->import_model_class = $row['import_model_class'] ?? null;
             $import->for_relation = $row['for_relation'] ?? null;

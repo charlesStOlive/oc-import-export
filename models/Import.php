@@ -31,7 +31,7 @@ class Import extends Model
      */
     public $rules = [
         'name' => 'required',
-        'data_source_id' => 'required',
+        'data_source' => 'required',
     ];
 
     /**
