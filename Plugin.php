@@ -136,7 +136,7 @@ class Plugin extends PluginBase
                 'tab' => 'Waka - Import Export',
                 'label' => 'Administrateur des imports',
             ],
-            'waka.importexport.imp' => [
+            'waka.importexport.imp.user' => [
                 'tab' => 'Waka - Import Export',
                 'label' => 'Importe des données avec des restrictions',
             ],
@@ -144,7 +144,7 @@ class Plugin extends PluginBase
                 'tab' => 'Waka - Import Export',
                 'label' => 'Administrateur des exports',
             ],
-            'waka.importexport.exp' => [
+            'waka.importexport.exp.user' => [
                 'tab' => 'Waka - Import Export',
                 'label' => 'Exporte des données avec des restrictions',
             ],
