@@ -12,7 +12,7 @@ class SheetsImport implements WithMultipleSheets
     public function sheets(): array
     {
         $settingImports = Settings::get('start_imports');
-        $configArray = \Config::get('waka.wconfig::start_data');
+        $configArray = \Config::get('wcli.wconfig::start_data');
 
         //trace_log($configArray);
 
