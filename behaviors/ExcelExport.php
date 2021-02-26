@@ -10,12 +10,12 @@ use Waka\Utils\Classes\DataSource;
 
 class ExcelExport extends ControllerBehavior
 {
-    protected $ExportPopupWidget;
+    protected $exportPopupWidget;
 
     public function __construct($controller)
     {
         parent::__construct($controller);
-        $this->ExportPopupWidget = $this->createExportPopupWidget();
+        $this->exportPopupWidget = $this->createExportPopupWidget();
     }
 
     public function onExportPopupForm()
@@ -37,15 +37,15 @@ class ExcelExport extends ControllerBehavior
         Session::put('modelImportExportLog.listId', $results->lists('id'));
         Session::put('modelImportExportLog.checkedIds', $checkedIds);
         //
-        $model = post('model');
+        $modelClass = post('modelClass');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export');
 
-        $this->ExportPopupWidget->getField('logeable_id')->options = $options;
-        $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
+        $this->exportPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;
-        $this->vars['model'] = $model;
+        $this->vars['modelClass'] = $modelClass;
         $this->vars['all'] = $model::count();
         $this->vars['filtered'] = $query->count();
         $this->vars['countCheck'] = $countCheck;
@@ -56,17 +56,17 @@ class ExcelExport extends ControllerBehavior
     public function onExportChildPopupForm()
     {
         //liste des requêtes filtrées
-        $model = post('model');
+        $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
 
-        $this->ExportPopupWidget->getField('logeable_id')->options = $options;
-        $this->vars['ExportPopupWidget'] = $this->ExportPopupWidget;
+        $this->exportPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;
         $this->vars['modelId'] = $modelId;
-        $this->vars['model'] = $model;
+        $this->vars['modelClass'] = $modelClass;
 
         return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm');
     }

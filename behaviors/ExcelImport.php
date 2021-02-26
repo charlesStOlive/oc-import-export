@@ -24,28 +24,28 @@ class ExcelImport extends ControllerBehavior
     // }
     public function onImportPopupForm()
     {
-        $model = post('model');
+        $modelClass = post('modelClass');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import');
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
-        $this->vars['model'] = $model;
+        $this->vars['model'] = $modelClass;
         return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup.htm');
     }
 
     public function onImportChildPopupForm()
     {
-        $model = post('model');
+        $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
-        $this->vars['model'] = $model;
+        $this->vars['modelClass'] = $modelClass;
         $this->vars['modelId'] = $modelId;
         return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup_child.htm');
     }
