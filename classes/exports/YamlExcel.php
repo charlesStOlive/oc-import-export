@@ -48,7 +48,6 @@ class YamlExcel
         $baseModel = $config['base'];
         //traitement des fields classique
         return $baseModel['fields'];
-
     }
     public function getFinalModels()
     {
@@ -65,9 +64,7 @@ class YamlExcel
             } else {
                 return $this->model::get();
             }
-
         }
-
     }
     public function export()
     {
@@ -79,5 +76,4 @@ class YamlExcel
         $rows = $this->getConfig();
         return array_pluck($rows, 'column');
     }
-
 }

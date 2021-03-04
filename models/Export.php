@@ -119,5 +119,4 @@ class Export extends Model
     /**
      * OTHERS
      */
-    
 }

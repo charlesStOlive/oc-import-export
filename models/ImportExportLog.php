@@ -140,7 +140,6 @@ class ImportExportLog extends Model
             }
 
             $fields->_info->hidden = false;
-
         } else {
             if (isset($fields->excel_file)) {
                 $fields->excel_file->hidden = true;

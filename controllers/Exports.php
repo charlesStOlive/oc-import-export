@@ -23,5 +23,4 @@ class Exports extends Controller
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.ImportExport', 'imports_exports');
     }
-
 }

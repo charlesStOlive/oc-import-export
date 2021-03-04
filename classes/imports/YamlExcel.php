@@ -30,7 +30,6 @@ class YamlExcel
         $this->setFinalModels($ds->class);
         //$this->model = $config->model;
         $this->parse($config->column_list);
-
     }
 
     public function setFinalModels($model)
@@ -48,9 +47,7 @@ class YamlExcel
             $this->relationKeyName = $relatedModel->getForeignKeyName();
         } else {
             $this->model = $model;
-
         }
-
     }
 
     public function parse($yaml)
@@ -72,7 +69,6 @@ class YamlExcel
             $this->hasRelations = true;
             $this->relations = $this->getRelations($rows['relation_fields']);
         }
-
     }
 
     public function import($rows)
@@ -101,7 +97,6 @@ class YamlExcel
                         if (count($cloudis)) {
                             $relatedModel->uploadToCloudinary($cloudis);
                         }
-
                     }
                     $model[$relation->name] = $relatedModel;
                 }
@@ -117,7 +112,6 @@ class YamlExcel
                 $model->save();
             }
         }
-
     }
 
     public function getModelOrNew($columns)
@@ -139,7 +133,6 @@ class YamlExcel
         } else {
             return new $this->model;
         }
-
     }
 
     public function getRelations($relation_rows)

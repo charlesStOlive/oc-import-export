@@ -36,5 +36,4 @@ class Imports extends Controller
         $this->bodyClass = 'compact-container';
         $this->vars['activeTab'] = $tab ?: 'templates';
     }
-
 }

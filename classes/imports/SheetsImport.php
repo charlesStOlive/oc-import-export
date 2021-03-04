@@ -22,7 +22,6 @@ class SheetsImport implements WithMultipleSheets
             if ($configArray[$key]['truncate'] ?? false) {
                 Db::table($configArray[$key]['table'])->truncate();
             }
-
         }
         //trace_log($sheetsToImport);
         return $sheetsToImport;

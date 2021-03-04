@@ -117,5 +117,4 @@ class Import extends Model
     /**
      * OTHERS
      */
-
 }

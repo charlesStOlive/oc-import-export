@@ -29,11 +29,8 @@ class QueueExcel
             Event::fire('job.end.import', [$job]);
             $job->delete();
         }
-
     }
     public function export($job, $data)
     {
-
     }
-
 }

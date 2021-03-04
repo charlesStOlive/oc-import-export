@@ -37,7 +37,6 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-
     }
 
     /**
@@ -106,7 +105,6 @@ class Plugin extends PluginBase
         //         return View::make('waka.importexport::excelimport_child_popup')->withData($data);;
         //     }
         // });
-
     }
 
     /**
@@ -158,7 +156,6 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         return [];
-
     }
     public function registerSettings()
     {

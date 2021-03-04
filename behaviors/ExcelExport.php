@@ -156,10 +156,8 @@ class ExcelExport extends ControllerBehavior
         if ($exportType == 'filtered') {
             $listId = Session::get('modelImportExportLog.listId');
             Session::forget('modelImportExportLog.checkedIds');
-
         } elseif ($exportType == 'checked') {
             $listId = Session::get('modelImportExportLog.checkedIds');
-
         }
         Session::forget('modelImportExportLog.listId');
         Session::forget('modelImportExportLog.checkedIds');
@@ -175,7 +173,6 @@ class ExcelExport extends ControllerBehavior
             return Excel::download($classExcel->newInstanceArgs([$listId]), str_slug($configExport->name) . '.xlsx');
         }
         //return Excel::download(new $configExport->type->class, 'test.xlsx');
-
     }
 
     public function createExportPopupWidget()
