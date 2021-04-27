@@ -63,6 +63,8 @@ class YamlExcel
 
         $fields = $baseModel['fields'];
         foreach ($fields as $key => $value) {
+            trace_log($key);
+            trace_log($value);
             $this->fieldObjects[$key] = new FieldObject($key, $value);
         }
         if (array_key_exists('relation_fields', $rows)) {
@@ -73,6 +75,7 @@ class YamlExcel
 
     public function import($rows)
     {
+        trace_log("Lancement de l'import");
         foreach ($rows as $row) {
             $model = $this->getModelOrNew($row);
             foreach ($this->fieldObjects as $fieldObject) {
@@ -121,7 +124,7 @@ class YamlExcel
         //trace_log("On recherche le model");
         $excelUniqueColumn = $columns[$this->unique_column] ?? false;
         $findModel;
-        //trace_log("Valeur recherché : ".$excelUniqueColumn." : ".$this->unique_key);
+        trace_log("Valeur recherché : ".$excelUniqueColumn." : ".$this->unique_key);
         if ($excelUniqueColumn) {
             $findModel = $this->model::where($this->unique_key, '=', $excelUniqueColumn)->first();
             if ($findModel) {

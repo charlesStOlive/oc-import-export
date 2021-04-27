@@ -29,6 +29,10 @@ class FieldObject
     {
         $this->values = $values;
         $this->key = $key;
+        trace_log("__construct");
+        trace_log($key);
+        trace_log($values);
+        trace_log(self::COLUMN);
         $this->column = array_key_exists(self::COLUMN, $values) ? $values[self::COLUMN] : null;
         $this->type = 'normal';
     }
@@ -56,6 +60,7 @@ class FieldObject
     public function getValue($columns)
     {
         $slug = $this->getSlug();
+        trace_log($slug);
         if ($slug) {
             return str_slug($columns[$slug]);
         }
