@@ -176,10 +176,10 @@ class ExcelExport extends ControllerBehavior
         if ($configExport->is_editable) {
             return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel($configExport, $listId, $parentId), str_slug($configExport->name) . '.xlsx');
         } else {
-            if (!$configExport->import_model_class) {
+            if (!$configExport->export_model_class) {
                 throw new \SystemException('import_model_class manqunt dans configexport');
             }
-            $classExcel = new \ReflectionClass($configExport->import_model_class);
+            $classExcel = new \ReflectionClass($configExport->export_model_class);
 
             return Excel::download($classExcel->newInstanceArgs([$listId]), str_slug($configExport->name) . '.xlsx');
         }
