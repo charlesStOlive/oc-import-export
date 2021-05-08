@@ -84,7 +84,7 @@ class ExcelExport extends ControllerBehavior
     public function onExportValidation()
     {
         $errors = $this->CheckValidation(\Input::all());
-        trace_log(\Input::all());
+        //trace_log(\Input::all());
         if ($errors) {
             throw new \ValidationException(['error' => $errors]);
         }
