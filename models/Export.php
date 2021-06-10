@@ -8,7 +8,7 @@ use Model;
 
 class Export extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\Validation;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
 
     /**
