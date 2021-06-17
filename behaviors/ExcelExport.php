@@ -46,11 +46,16 @@ class ExcelExport extends ControllerBehavior
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;
         $this->vars['modelClass'] = $modelClass;
-        $this->vars['all'] = $model::count();
+        $this->vars['all'] = $modelClass::count();
         $this->vars['filtered'] = $query->count();
         $this->vars['countCheck'] = $countCheck;
 
-        return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup.htm');
+        
+        if($options) {
+            return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup.htm');
+        } else {
+            return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
     }
 
     public function onExportChildPopupForm()
@@ -68,18 +73,24 @@ class ExcelExport extends ControllerBehavior
         $this->vars['modelId'] = $modelId;
         $this->vars['modelClass'] = $modelClass;
 
-        return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm');
+        
+        if($options) {
+            return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm');
+        } else {
+            return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
     }
 
     public function onExportValidation()
     {
         $errors = $this->CheckValidation(\Input::all());
+        //trace_log(\Input::all());
         if ($errors) {
             throw new \ValidationException(['error' => $errors]);
         }
 
         $controllerUrl = post('controllerUrl') . '/';
-        $exportType = post('exportType');
+        $exportType = 'all';
         $configExportId = post('export_array.logeable_id');
 
         return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
@@ -104,12 +115,11 @@ class ExcelExport extends ControllerBehavior
     {
         $rules = [
             'export_array.logeable_id' => 'required',
-            'exportType' => 'required',
         ];
 
         $messages = [
             'export_array.logeable_id.required' => Lang::get("waka.importexport::lang.errors.logeable_id"),
-            'exportType.wakaPdfId' => Lang::get("waka.importexport::lang.errors.exportType"),
+            'logeable_type' => Lang::get("waka.importexport::lang.errors.exportType"),
         ];
 
         $validator = \Validator::make($inputs, $rules, $messages);
@@ -154,6 +164,7 @@ class ExcelExport extends ControllerBehavior
         //Gestion de la liste avec la session
         $listId = null;
         if ($exportType == 'filtered') {
+            //La methode FILTERED est pour l'instant abandonnée.
             $listId = Session::get('modelImportExportLog.listId');
             Session::forget('modelImportExportLog.checkedIds');
         } elseif ($exportType == 'checked') {
@@ -165,10 +176,10 @@ class ExcelExport extends ControllerBehavior
         if ($configExport->is_editable) {
             return Excel::download(new \Waka\ImportExport\Classes\Exports\ExportModel($configExport, $listId, $parentId), str_slug($configExport->name) . '.xlsx');
         } else {
-            if (!$configExport->import_model_class) {
+            if (!$configExport->export_model_class) {
                 throw new \SystemException('import_model_class manqunt dans configexport');
             }
-            $classExcel = new \ReflectionClass($configExport->import_model_class);
+            $classExcel = new \ReflectionClass($configExport->export_model_class);
 
             return Excel::download($classExcel->newInstanceArgs([$listId]), str_slug($configExport->name) . '.xlsx');
         }

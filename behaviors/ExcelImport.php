@@ -32,7 +32,13 @@ class ExcelImport extends ControllerBehavior
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
         $this->vars['model'] = $modelClass;
-        return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup.htm');
+
+        if($options) {
+            return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup.htm');
+        } else {
+            return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
+        
     }
 
     public function onImportChildPopupForm()
@@ -47,7 +53,13 @@ class ExcelImport extends ControllerBehavior
         $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
         $this->vars['modelClass'] = $modelClass;
         $this->vars['modelId'] = $modelId;
-        return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup_child.htm');
+
+        if($options) {
+            return $this->makePartial('$/waka/importexport/behaviors/excelimport/_popup_child.htm');
+        } else {
+            return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
+        
     }
 
     public function onImportValidation()
