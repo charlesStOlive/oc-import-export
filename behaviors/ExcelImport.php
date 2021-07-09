@@ -26,7 +26,7 @@ class ExcelImport extends ControllerBehavior
     {
         $modelClass = post('modelClass');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = new DataSource($modelClass, 'class');;
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import');
 
         $this->ImportPopupWidget->getField('logeable_id')->options = $options;
@@ -136,7 +136,8 @@ class ExcelImport extends ControllerBehavior
                 if (!$configImport->import_model_class) {
                     throw new \SystemException('import_model_class manqunt dans configexport');
                 }
-                Excel::import(new $configImport->import_model_class, $file->getDiskPath());
+                $importClass = new \ReflectionClass($configImport->import_model_class);
+                Excel::import($importClass->newInstanceArgs([$parentId]) , $file->getDiskPath());
             }
         }
 

@@ -1,7 +1,7 @@
 <?php
 return [
     'btns' => [
-        'exportChild' => [
+        'exportChildExcel' => [
             'label' => 'waka.importexport::lang.global.btn_export',
             'class' => 'btn-secondary',
             'ajaxCaller' => 'onExportChildPopupForm',
@@ -13,7 +13,7 @@ return [
             'ajaxCaller' => 'onExportPopupForm',
             'icon' => 'oc-icon-file-excel-o',
         ],
-        'importChild' => [
+        'importChildExcel' => [
             'label' => 'waka.importexport::lang.global.btn_import',
             'class' => 'btn-secondary',
             'ajaxCaller' => 'onImportChildPopupForm',
