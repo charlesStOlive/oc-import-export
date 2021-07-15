@@ -46,8 +46,7 @@ class ExcelExport extends ControllerBehavior
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;
         $this->vars['modelClass'] = $modelClass;
-        $this->vars['all'] = $modelClass::count();
-        $this->vars['filtered'] = $query->count();
+        $this->vars['countFiltered'] = $query->count();
         $this->vars['countCheck'] = $countCheck;
 
         
@@ -63,21 +62,36 @@ class ExcelExport extends ControllerBehavior
         //liste des requêtes filtrées
         $modelClass = post('modelClass');
         $modelId = post('modelId');
-
         $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
-
         $this->exportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;
         $this->vars['modelId'] = $modelId;
         $this->vars['modelClass'] = $modelClass;
-
-        
         if($options) {
-            return $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm');
+            return  $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm');
         } else {
             return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
+    }
+
+    public function onExportChildContentForm()
+    {
+        //liste des requêtes filtrées
+        $modelClass = post('modelClass');
+        $modelId = post('modelId');
+        $ds = new DataSource($modelClass, 'class');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
+        $this->exportPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
+        $this->vars['controllerUrl'] = $ds->controller;
+        $this->vars['modelId'] = $modelId;
+        $this->vars['modelClass'] = $modelClass;
+        if($options) {
+            return ['#popupActionContent' => $this->makePartial('$/waka/importexport/behaviors/excelexport/_popup_child.htm')];
+        } else {
+            return ['#popupActionContent' => $this->makePartial('$/waka/utils/views/_popup_no_model.htm')];
         }
     }
 
@@ -90,7 +104,7 @@ class ExcelExport extends ControllerBehavior
         }
 
         $controllerUrl = post('controllerUrl') . '/';
-        $exportType = 'all';
+        $exportType = post('lotType');
         $configExportId = post('export_array.logeable_id');
 
         return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
@@ -157,8 +171,9 @@ class ExcelExport extends ControllerBehavior
         return Excel::download(new $configExport->type->class, str_slug($configExport->name));
     }
 
-    public function makeexcel($configExportId, $exportType, $parentId = null)
+    public function makeexcel($configExportId, $exportType=null, $parentId = null)
     {
+        //trace_log($exportType);
         $configExport = Export::find($configExportId);
         //trace_log(str_slug($configExport->name) . 'xlsx');
         //Gestion de la liste avec la session
@@ -181,7 +196,7 @@ class ExcelExport extends ControllerBehavior
             }
             $classExcel = new \ReflectionClass($configExport->export_model_class);
 
-            return Excel::download($classExcel->newInstanceArgs([$listId]), str_slug($configExport->name) . '.xlsx');
+            return Excel::download($classExcel->newInstanceArgs([$listId, $parentId]), str_slug($configExport->name) . '.xlsx');
         }
         //return Excel::download(new $configExport->type->class, 'test.xlsx');
     }

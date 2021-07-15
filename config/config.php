@@ -5,6 +5,7 @@ return [
             'label' => 'waka.importexport::lang.global.btn_export',
             'class' => 'btn-secondary',
             'ajaxCaller' => 'onExportChildPopupForm',
+            'ajaxInlineCaller' => 'onExportChildContentForm',
             'icon' => 'oc-icon-file-excel-o',
         ],
         'exportExcel' => [
@@ -17,6 +18,7 @@ return [
             'label' => 'waka.importexport::lang.global.btn_import',
             'class' => 'btn-secondary',
             'ajaxCaller' => 'onImportChildPopupForm',
+            'ajaxInlineCaller' => 'onImportChilContentdForm',
             'icon' => 'oc-icon-file-excel-o',
         ],
          'importExcel' => [

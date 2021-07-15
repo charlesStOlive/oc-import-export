@@ -1,20 +1,15 @@
-<?= Form::open() ?>
+<?= Form::open(['files' => true]) ?>
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="popup">×</button>
+<div>
     <h4 class="modal-title">
         <?= e(trans('waka.importexport::lang.global.import_title')) ?>
     </h4>
-</div>
 
-<input type="hidden" name="logeable_type" value="<?= $model ?>" />
-
-<div class="modal-body" data-field-name="logeable">
+    <input type="hidden" name="logeable_type" value="<?= $modelClass ?>" />
     <?= $importPopupWidget->render() ?>
-</div>
 
-<div class="modal-footer">
-    <button type="submit" data-request="onImportValidation" data-request-data="redirect:0" data-popup-load-indicator
+    <button type="submit" data-request="onImportChildValidation" data-request-data=" modelId:'<?=$modelId?>'"
+            data-popup-load-indicator
             class="btn btn-primary">
         <?= e(trans('waka.utils::lang.global.validate')) ?>
     </button>
@@ -22,6 +17,7 @@
     <button type="button" class="btn btn-default" data-dismiss="popup">
         <?= e(trans('waka.utils::lang.global.close')) ?>
     </button>
+</div>
 </div>
 
 <?= Form::close() ?>

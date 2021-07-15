@@ -71,56 +71,15 @@ class ImportExportLog extends Model
     public $morphMany = [];
     public $attachOne = [
         'excel_file' => 'System\Models\File',
+        'excel_file_import' => 'System\Models\File',
     ];
     public $attachMany = [];
 
     public function listImportTypes()
     {
-        //trace_log($this->logeable_type);
         return Type::where('import', true)->lists('name', 'id');
     }
-    // public function listImport()
-    // {
-    //     $list = [];
-    //     $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
-    //     $user = \BackendAuth::getUser();
-    //     //trace_log("list import");
-    //     if ($user->hasAccess('waka.importexport.imp.admin') || $user->hasAccess('waka.importexport.imp.user')) {
-    //         //trace_log("non restricted");
-    //         $list = ConfigImport::where('model', '=', $this->logeable_type)->lists('name', 'id');
-    //     } else if ($user->hasAccess('waka.importexport.imp.restricted')) {
-    //         //trace_log("restricted");
-    //         //trace_log($user->id);
-    //         $list = ConfigImport::where('model', '=', $this->logeable_type)
-    //             ->whereHas('users', function ($query) use ($user) {
-    //                 $query->where('id', $user->id);
-    //             })
-    //             ->lists('name', 'id');
-    //     }
-    //     return $list;
-
-    // }
-    // public function listExport()
-    // {
-    //     // $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
-    //     // $list = ConfigExport::where('model', '=', $this->logeable_type)->lists('name', 'id');
-    //     // return $list;
-    //     //trace_log("liste exporte");
-    //     $list = [];
-    //     $this->logeable_type = Session::pull('modelImportExportLog.targetModel');
-    //     $user = \BackendAuth::getUser();
-    //     if ($user->hasAccess('waka.importexport.impexp.all.*')) {
-    //         $list = ConfigExport::where('model', '=', $this->logeable_type)->lists('name', 'id');
-    //     } else if ($user->hasAccess('waka.importexport.impexp.limited') || $user->hasAccess('waka.importExport.exp')) {
-    //         //trace_log($user->id);
-    //         $list = ConfigExport::where('model', '=', $this->logeable_type)
-    //             ->whereHas('users', function ($query) use ($user) {
-    //                 $query->where('id', $user->id);
-    //             })
-    //             ->lists('name', 'id');
-    //     }
-    //     return $list;
-    // }
+   
     public function getCommentImportAttribute()
     {
         $comment = Import::find($this->logeable_id)->comment ?? null;
@@ -138,13 +97,11 @@ class ImportExportLog extends Model
             if (isset($fields->excel_file)) {
                 $fields->excel_file->hidden = false;
             }
-
             $fields->_info->hidden = false;
         } else {
             if (isset($fields->excel_file)) {
                 $fields->excel_file->hidden = true;
             }
-
             $fields->_info->hidden = true;
         }
     }

@@ -22,4 +22,5 @@ fields:
         label: waka.importexport::lang.importexportlog.use_queue
         type: checkbox
         commentAbove: waka.importexport::lang.importexportlog.use_queue_com
+        disabled: true
     

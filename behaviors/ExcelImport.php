@@ -8,20 +8,15 @@ use Waka\Utils\Classes\DataSource;
 
 class ExcelImport extends ControllerBehavior
 {
-    protected $ImportPopupWidget;
+    protected $importPopupWidget;
 
     public function __construct($controller)
     {
         parent::__construct($controller);
-        $this->ImportPopupWidget = $this->createImportPopupWidget();
+        $this->importPopupWidget = $this->createImportPopupWidget();
     }
-    // public function onImport()
-    // {
-    //     $configImportId = 1;
-    //     $configImport = Import::find($configImportId);
-    //     Session::put('excel.configImportId', $configImportId);
-    //     return Redirect::refresh();
-    // }
+
+    
     public function onImportPopupForm()
     {
         $modelClass = post('modelClass');
@@ -29,8 +24,8 @@ class ExcelImport extends ControllerBehavior
         $ds = new DataSource($modelClass, 'class');;
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import');
 
-        $this->ImportPopupWidget->getField('logeable_id')->options = $options;
-        $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
+        $this->importPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['importPopupWidget'] = $this->importPopupWidget;
         $this->vars['model'] = $modelClass;
 
         if($options) {
@@ -48,9 +43,8 @@ class ExcelImport extends ControllerBehavior
 
         $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
-
-        $this->ImportPopupWidget->getField('logeable_id')->options = $options;
-        $this->vars['ImportPopupWidget'] = $this->ImportPopupWidget;
+        $this->importPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['importPopupWidget'] = $this->importPopupWidget;
         $this->vars['modelClass'] = $modelClass;
         $this->vars['modelId'] = $modelId;
 
@@ -62,10 +56,34 @@ class ExcelImport extends ControllerBehavior
         
     }
 
+    public function onImportChildContentForm()
+    {
+        $modelClass = post('modelClass');
+        $modelId = post('modelId');
+
+        $ds = new DataSource($modelClass, 'class');
+        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
+        $this->importPopupWidget->getField('logeable_id')->options = $options;
+        $this->vars['importPopupWidget'] = $importPopupWidget;
+        $this->vars['modelClass'] = $modelClass;
+        $this->vars['modelId'] = $modelId;
+
+        if($options) {
+            return ['#popupActionContent' => $this->makePartial('$/waka/importexport/behaviors/excelimport/_container_child.htm')];
+        } else {
+            return ['#popupActionContent' => $this->makePartial('$/waka/utils/views/_popup_no_model.htm')];
+        }
+
+        
+        
+    }
+
     public function onImportValidation()
     {
-        $data = $this->ImportPopupWidget->getSaveData();
-        //trace_log($this->ImportPopupWidget->getSaveData());
+        //trace_log('onImportValidation');
+        $data = $this->importPopupWidget->getSaveData();
+        //trace_log($this->importPopupWidget->getSaveData());
+        //trace_log(\Input::All());
         $sessionKey = \Input::get('_session_key');
         $iel = new \Waka\ImportExport\Models\ImportExportLog;
         $iel->fill($data);
@@ -73,10 +91,11 @@ class ExcelImport extends ControllerBehavior
             ->excel_file()
             ->withDeferred($sessionKey)
             ->first();
+        //trace_log($file->toArray());
         //le fichier est maintenant prêt à être traité.
         //$iel->save();
         $configImportId = $data['logeable_id'];
-        $useQueue = $data['use_queue'];
+        $useQueue = $data['use_queue'] ?? false;
         // trace_log(post('logeable_id'));
         // trace_log($data);
         if ($useQueue) {
@@ -95,6 +114,7 @@ class ExcelImport extends ControllerBehavior
                 if (!$configImport->import_model_class) {
                     throw new \SystemException('import_model_class manqunt dans configexport');
                 }
+                //trace_log("j importe");
                 Excel::import(new $configImport->import_model_class, $file->getDiskPath());
             }
         }
@@ -104,30 +124,29 @@ class ExcelImport extends ControllerBehavior
 
     public function onImportChildValidation()
     {
-        $data = $this->ImportPopupWidget->getSaveData();
-        //trace_log($this->ImportPopupWidget->getSaveData());
+        $data = $this->importPopupWidget->getSaveData();;
         $sessionKey = \Input::get('_session_key');
-        $iel = new \Waka\ImportExport\Models\ImportExportLog;
-        $iel->fill($data);
-        $file = $iel
+        $ielt = new \Waka\ImportExport\Models\ImportExportLog;
+        $ielt->fill($data);
+        $file = $ielt
             ->excel_file()
             ->withDeferred($sessionKey)
             ->first();
+        //trace_log($ielt->toArray());
         //le fichier est maintenant prêt à être traité.
         //$iel->save();
         $configImportId = $data['logeable_id'];
-        $useQueue = $data['use_queue'];
+        //$useQueue = $data['use_queue'];
+        $useQueue = false;
         $parentId = post('modelId');
-        // trace_log(post('logeable_id'));
-        // trace_log($data);
         if ($useQueue) {
             //trace_log("queue");
-            $datas = [
-                'configImportId' => $configImportId,
-                'file_path' => $file->getDiskPath(),
-            ];
-            $jobId = \Queue::push('\Waka\ImportExport\Classes\Queue\QueueExcel@import', $datas);
-            \Event::fire('job.create.imp', [$jobId, 'Import en attente ']);
+            // $datas = [
+            //     'configImportId' => $configImportId,
+            //     'file_path' => $file->getDiskPath(),
+            // ];
+            // $jobId = \Queue::push('\Waka\ImportExport\Classes\Queue\QueueExcel@import', $datas);
+            // \Event::fire('job.create.imp', [$jobId, 'Import en attente ']);
         } else {
             $configImport = Import::find($configImportId);
             if ($configImport->is_editable) {
@@ -143,7 +162,6 @@ class ExcelImport extends ControllerBehavior
 
         return Redirect::refresh();
     }
-
     public function createImportPopupWidget()
     {
         $config = $this->makeConfig('$/waka/importexport/models/importexportlog/fields_popup_import.yaml');

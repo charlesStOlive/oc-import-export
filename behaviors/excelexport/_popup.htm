@@ -17,6 +17,37 @@
        value="<?= $controllerUrl ?>" />
 
 <div class="modal-body">
+    <div class="radio-field inline-options">
+        <label>
+            <?=Lang::get("waka.cloud::lang.popup.choose_who")?>
+        </label>
+        <div class="radio custom-radio">
+            <input checked="checked"
+                   name="lotType"
+                   value="filtered"
+                   type="radio"
+                   id="filtered">
+            <label for="filtered">
+                <?=e(trans("waka.cloud::lang.popup.filtered"))?>
+            </label>
+            <p class="help-block">Nombres :
+                <?=$countFiltered?>
+            </p>
+        </div>
+        <div class="radio custom-radio">
+            <input name="lotType"
+                   value="checked"
+                   type="radio"
+                   id="checked"
+                   <?=$countCheck ? '' : 'disabled' ?>>
+            <label for="checked">
+                <?=e(trans("waka.cloud::lang.popup.checked"))?>
+            </label>
+            <p class="help-block">Nombre :
+                <?=$countCheck?>
+            </p>
+        </div>
+    </div>
     <?= $exportPopupWidget->render() ?>
 </div>
 
