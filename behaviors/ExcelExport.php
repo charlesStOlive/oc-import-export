@@ -107,7 +107,7 @@ class ExcelExport extends ControllerBehavior
         $exportType = post('lotType');
         $configExportId = post('export_array.logeable_id');
 
-        return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
+        return Redirect::to('backend/' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType);
     }
 
     public function onExportChildValidation()
