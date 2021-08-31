@@ -122,7 +122,7 @@ class ExcelExport extends ControllerBehavior
         $exportType = 'child';
         $configExportId = post('export_array.logeable_id');
 
-        return Redirect::to('backend\\' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType . '/' . $parentId);
+        return Redirect::to('backend/' . $controllerUrl . 'makeexcel/' . $configExportId . '/' . $exportType . '/' . $parentId);
     }
 
     public function CheckValidation($inputs)
