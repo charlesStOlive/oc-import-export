@@ -21,7 +21,7 @@ class ExcelImport extends ControllerBehavior
     {
         $modelClass = post('modelClass');
 
-        $ds = new DataSource($modelClass, 'class');;
+        $ds = \DataSources::findByClass($modelClass);;
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import');
 
         $this->importPopupWidget->getField('logeable_id')->options = $options;
@@ -41,7 +41,7 @@ class ExcelImport extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
         $this->importPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['importPopupWidget'] = $this->importPopupWidget;
@@ -61,7 +61,7 @@ class ExcelImport extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
         $this->importPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['importPopupWidget'] = $importPopupWidget;

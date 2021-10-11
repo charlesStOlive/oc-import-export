@@ -18,7 +18,7 @@ class YamlExcel
     public function __construct($config, $listId = null, $parentId = null)
     {
         $this->importer = $config;
-        $ds = new DataSource($config->data_source);
+        $ds = \DataSources::find($config->data_source);
         $this->model = $ds->class;
         $this->parentId = $parentId;
         $this->config = $config->column_list;

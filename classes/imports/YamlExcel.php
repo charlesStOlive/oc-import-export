@@ -26,7 +26,7 @@ class YamlExcel
     {
         $this->importer = $config;
         $this->parentId = $parentId;
-        $ds = new DataSource($config->data_source);
+        $ds = \DataSources::find($config->data_source);
         $this->setFinalModels($ds->class);
         //$this->model = $config->model;
         $this->parse($config->column_list);

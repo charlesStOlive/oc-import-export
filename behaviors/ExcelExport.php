@@ -39,7 +39,7 @@ class ExcelExport extends ControllerBehavior
         //
         $modelClass = post('modelClass');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export');
 
         $this->exportPopupWidget->getField('logeable_id')->options = $options;
@@ -62,7 +62,7 @@ class ExcelExport extends ControllerBehavior
         //liste des requêtes filtrées
         $modelClass = post('modelClass');
         $modelId = post('modelId');
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
         $this->exportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
@@ -81,7 +81,7 @@ class ExcelExport extends ControllerBehavior
         //liste des requêtes filtrées
         $modelClass = post('modelClass');
         $modelId = post('modelId');
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
         $this->exportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
