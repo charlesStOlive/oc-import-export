@@ -63,7 +63,7 @@ class ExcelExport extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
         $ds = \DataSources::findByClass($modelClass);
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Export', true);
+        $options = $ds->getProductorOptions('Waka\ImportExport\Models\Export', true);
         $this->exportPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['exportPopupWidget'] = $this->exportPopupWidget;
         $this->vars['controllerUrl'] = $ds->controller;

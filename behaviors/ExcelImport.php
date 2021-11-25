@@ -42,7 +42,7 @@ class ExcelImport extends ControllerBehavior
         $modelId = post('modelId');
 
         $ds = \DataSources::findByClass($modelClass);
-        $options = $ds->getPartialIndexOptions('Waka\ImportExport\Models\Import', true);
+        $options = $ds->getProductorOptions('Waka\ImportExport\Models\Import', true);
         $this->importPopupWidget->getField('logeable_id')->options = $options;
         $this->vars['importPopupWidget'] = $this->importPopupWidget;
         $this->vars['modelClass'] = $modelClass;
