@@ -13,10 +13,10 @@ class CreateImportsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('data_source');
+            $table->text('relation')->nullable();
+            $table->boolean('for_relation')->nullable();
             $table->boolean('is_editable')->nullable();
             $table->string('import_model_class')->nullable();
-            $table->boolean('for_relation')->nullable();
-            $table->text('relation')->nullable();
             $table->text('column_list')->nullable();
             $table->text('comment')->nullable();
             $table->boolean('is_scope')->nullable();

@@ -2,21 +2,34 @@
 #  Form Field Definitions
 # ===================================
 
-fields:    
+fields:
     name:
         label: waka.importexport::import.name
-        span: left
+        span: right
         required: true
-        commentAbove: waka.importexport::import.name_com
+        comment: waka.importexport::import.name_com
+    state:
+        label: waka.importexport::import.state
+        span: left
+        type: balloon-selector
+        required: true
+        default: Brouillon
+        options: listStates
+        default: Actif
+        permissions: [waka.mailer.admin.*]
     data_source:
         label: waka.importexport::import.data_source
-        span: right
+        span: full
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
         options: listDataSource
         readOnly: true
-        commentAbove: waka.importexport::import.data_source_com
+        comment: waka.importexport::import.data_source_com
+    for_relation:
+        label: waka.importexport::import.for_relation
+        span: left
+        type: switch
     relation:
         label: waka.importexport::import.relation
         span: right
@@ -24,10 +37,6 @@ fields:
             action: show
             field: for_relation
             condition: checked
-    for_relation:
-        label: waka.importexport::import.for_relation
-        span: left
-        type: switch
     is_editable:
         label: waka.importexport::import.is_editable
         span: left
@@ -53,20 +62,3 @@ fields:
         label: waka.importexport::import.comment
         span: full
         type: textarea
-    is_scope:
-        label: waka.importexport::import.is_scope
-        span: left
-        type: switch
-    scopes:
-        label: waka.importexport::import.scopes
-        span: full
-        type: scopeslist
-        trigger:
-            action: show
-            field: is_scope
-            condition: checked
-    use_batch:
-        label: waka.importexport::import.use_batch
-        span: auto
-        type: switch
-        commentAbove: waka.importexport::import.use_batch_com

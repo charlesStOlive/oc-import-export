@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/waka/importexport/models/export/columns.yaml
+list: $/waka/importexport/models/import/columns.yaml
 
 # Model Class name
-modelClass: Waka\ImportExport\Models\Export
+modelClass: Waka\ImportExport\Models\Import
 
 # List Title
-title: waka.importexport::export.title
+title: waka.importexport::import.title
 
 # Link URL for each record
-recordUrl: waka/importexport/exports/update/:id
+recordUrl: waka/importexport/imports/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -43,8 +43,9 @@ showCheckboxes: true
 # Toolbar widget configuration
 toolbar:
     # Partial for toolbar buttons
-    buttons: list_toolbar_exports
+    buttons: ../imports/list_toolbar
 
     # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
+

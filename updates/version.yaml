@@ -14,3 +14,7 @@
   - create_exports_table.php
   - create_imports_table.php
   - create_import_export_logs_table.php
+1.1.0:
+  - "Ajout de l'état"
+  - create_imports_table_u110.php
+  - create_exports_table_u110.php

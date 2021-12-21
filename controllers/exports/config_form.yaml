@@ -12,20 +12,20 @@ form: $/waka/importexport/models/export/fields.yaml
 modelClass: Waka\ImportExport\Models\Export
 
 # Default redirect location
-defaultRedirect: waka/importexport/imports/index/exports
+defaultRedirect: waka/importexport/exports
 
 # Create page
 create:
     title: waka.importexport::export.create
     redirect: waka/importexport/exports/update/:id
-    redirectClose: waka/importexport/imports/index/exports
+    redirectClose: waka/importexport/exports
     form: $/waka/importexport/models/export/fields_create.yaml
 
 # Update page
 update:
     title: waka.importexport::export.update
     redirect: waka/importexport/exports/update/:id
-    redirectClose: waka/importexport/imports/index/exports
+    redirectClose: waka/importexport/exports
 
 # Preview page
 preview:

@@ -11,6 +11,7 @@ class Export extends Model
     use \Winter\Storm\Database\Traits\Validation;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
 
+
     /**
      * @var string The database table used by the model.
      */
@@ -20,12 +21,12 @@ class Export extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['id'];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    //protected $fillable = [];
 
     /**
      * @var array Validation rules for attributes
@@ -35,11 +36,15 @@ class Export extends Model
         'data_source' => 'required',
     ];
 
+    public $customMessages = [
+    ];
+
     /**
      * @var array attributes send to datasource for creating document
      */
     public $attributesToDs = [
     ];
+
 
     /**
      * @var array Attributes to be cast to native types
@@ -75,22 +80,29 @@ class Export extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = [
+    ];
     public $hasMany = [
     ];
-    public $hasOneThrough = [];
-    public $hasManyThrough = [];
+    public $hasOneThrough = [
+    ];
+    public $hasManyThrough = [
+    ];
     public $belongsTo = [
     ];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+    ];        
     public $morphTo = [];
-    public $morphOne = [];
+    public $morphOne = [
+    ];
     public $morphMany = [
     ];
     public $attachOne = [
     ];
     public $attachMany = [
     ];
+
+    //startKeep/
 
     /**
      *EVENTS
@@ -99,6 +111,9 @@ class Export extends Model
     /**
      * LISTS
      **/
+    public function listStates() {
+        return \Config::get('waka.utils::basic_state');
+    }
 
     /**
      * GETTERS
@@ -107,6 +122,10 @@ class Export extends Model
     /**
      * SCOPES
      */
+    public function scopeActive($query) {
+        return $query->where('state', 'Actif');
+
+    }
 
     /**
      * SETTERS
@@ -119,4 +138,6 @@ class Export extends Model
     /**
      * OTHERS
      */
+
+//endKeep/
 }

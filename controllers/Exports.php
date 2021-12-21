@@ -11,11 +11,13 @@ class Exports extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
+        'Waka.Utils.Behaviors.BtnsBehavior',
         'Waka.Utils.Behaviors.DuplicateModel',
     ];
-
     public $formConfig = 'config_form.yaml';
+    public $btnsConfig = 'config_btns.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
+    //FIN DE LA CONFIG AUTO
 
     public function __construct()
     {
@@ -23,4 +25,9 @@ class Exports extends Controller
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.ImportExport', 'imports_exports');
     }
+
+    //startKeep/
+
+        //endKeep/
 }
+

@@ -3,9 +3,11 @@
 # ===================================
 
 columns:
-
     name:
         label: waka.importexport::export.name
+        searchable: true
+    state:
+        label: waka.importexport::export.state
         searchable: true
     data_source:
         label: waka.importexport::export.data_source
@@ -13,18 +15,16 @@ columns:
     for_relation:
         label: waka.importexport::export.for_relation
         type: switch
+        searchable: false
+        sortable: true
     is_editable:
         label: waka.importexport::export.is_editable
         type: switch
+        searchable: false
+        sortable: true
     export_model_class:
         label: waka.importexport::export.export_model_class
         searchable: true
-    is_scope:
-        label: waka.importexport::export.is_scope
-        type: switch
-    use_batch:
-        label: waka.importexport::export.use_batch
-        type: switch
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense
