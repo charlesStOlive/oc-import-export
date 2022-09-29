@@ -70,8 +70,8 @@ class ImportExportLog extends Model
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [
-        'excel_file' => 'System\Models\File',
-        'excel_file_import' => 'System\Models\File',
+        'excel_file' => ['System\Models\File', 'delete' => true],
+        'excel_file_import' => ['System\Models\File', 'delete' => true]
     ];
     public $attachMany = [];
 
