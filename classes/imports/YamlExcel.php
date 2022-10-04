@@ -5,8 +5,6 @@ use Yaml;
 
 class YamlExcel
 {
-    use \Waka\Utils\Classes\Traits\StringRelation;
-
     private $importer;
     public $model;
     public $unique_update;
@@ -42,7 +40,8 @@ class YamlExcel
         }
         if ($this->parentId && $this->importer->relation) {
             $model = $model::find($this->parentId);
-            $relatedModel = $this->getStringRequestRelation($model, $this->importer->relation);
+            //$relatedModel = $this->getStringRequestRelation($model, $this->importer->relation);
+            $relatedModel = array_get($model, $this->importer->relation);
             $this->model = $relatedModel->getRelated();
             $this->relationKeyName = $relatedModel->getForeignKeyName();
         } else {

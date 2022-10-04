@@ -5,8 +5,6 @@ use System\Models\File;
 
 class FieldObject
 {
-    use \Waka\Utils\Classes\Traits\StringRelation;
-
     public $column;
     public $key;
     public $values;

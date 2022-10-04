@@ -6,8 +6,6 @@ use Yaml;
 
 class YamlExcel
 {
-    use \Waka\Utils\Classes\Traits\StringRelation;
-
     private $importer;
     public $model;
     private $excelCollection;
@@ -56,7 +54,8 @@ class YamlExcel
         }
         if ($this->parentId && $this->importer->relation) {
             $this->model = $this->model::find($this->parentId);
-            $finalModel = $this->getStringRequestRelation($this->model, $this->importer->relation);
+            //$finalModel = $this->getStringRequestRelation($this->model, $this->importer->relation);
+            $finalModel = array_get($this->model, $this->importer->relation);
             return $finalModel->get();
         } else {
             if ($this->listId) {
