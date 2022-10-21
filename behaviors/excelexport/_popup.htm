@@ -1,50 +1,36 @@
 <?= Form::open() ?>
 
 <div class="modal-header">
-    <button type="button"
-            class="close"
-            data-dismiss="popup">×</button>
+    <button type="button" class="close" data-dismiss="popup">×</button>
     <h4 class="modal-title">
         <?= e(trans('waka.importexport::lang.global.export_title')) ?>
     </h4>
 </div>
 
-<input type="hidden"
-       name="logeable_type"
-       value="<?= $modelClass ?>" />
-<input type="hidden"
-       name="controllerUrl"
-       value="<?= $controllerUrl ?>" />
+<input type="hidden" name="logeable_type" value="<?= $modelClass ?>" />
+<input type="hidden" name="controllerUrl" value="<?= $controllerUrl ?>" />
 
 <div class="modal-body">
     <div class="radio-field inline-options">
         <label>
-            <?=Lang::get("waka.cloud::lang.popup.choose_who")?>
+            <?= Lang::get("waka.cloud::lang.popup.choose_who") ?>
         </label>
         <div class="radio custom-radio">
-            <input checked="checked"
-                   name="lotType"
-                   value="filtered"
-                   type="radio"
-                   id="filtered">
+            <input checked="checked" name="lotType" value="filtered" type="radio" id="filtered">
             <label for="filtered">
-                <?=e(trans("waka.cloud::lang.popup.filtered"))?>
+                <?= e(trans("waka.cloud::lang.popup.filtered")) ?>
             </label>
             <p class="help-block">Nombres :
-                <?=$countFiltered?>
+                <?= $countFiltered ?>
             </p>
         </div>
         <div class="radio custom-radio">
-            <input name="lotType"
-                   value="checked"
-                   type="radio"
-                   id="checked"
-                   <?=$countCheck ? '' : 'disabled' ?>>
+            <input name="lotType" value="checked" type="radio" id="checked" <?= $countCheck ? '' : 'disabled' ?>>
             <label for="checked">
-                <?=e(trans("waka.cloud::lang.popup.checked"))?>
+                <?= e(trans("waka.cloud::lang.popup.checked")) ?>
             </label>
             <p class="help-block">Nombre :
-                <?=$countCheck?>
+                <?= $countCheck ?>
             </p>
         </div>
     </div>
@@ -52,15 +38,11 @@
 </div>
 
 <div class="modal-footer">
-    <button type="submit"
-            data-request="onExportValidation"
-            class="btn btn-primary">
+    <button type="submit" data-request="onExportValidation" class="btn btn-primary">
         Valider
     </button>
 
-    <button type="button"
-            class="btn btn-default"
-            data-dismiss="popup">
+    <button type="button" class="btn btn-default" data-dismiss="popup">
         Annuler
     </button>
 </div>
