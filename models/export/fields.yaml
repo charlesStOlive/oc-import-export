@@ -15,7 +15,6 @@ fields:
         required: true
         default: Brouillon
         options: listStates
-        default: Actif
         permissions: [waka.importexport.admin.*]
     data_source:
         label: waka.importexport::export.data_source

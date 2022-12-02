@@ -15,7 +15,7 @@ class CreateExportsTable extends Migration
             $table->string('data_source');
             $table->boolean('is_editable')->nullable();
             $table->string('export_model_class')->nullable();
-            $table->boolean('for_relation')->nullable();
+            $table->boolean('for_relation')->default(0);
             $table->text('relation')->nullable();
             $table->text('column_list')->nullable();
             $table->text('comment')->nullable();

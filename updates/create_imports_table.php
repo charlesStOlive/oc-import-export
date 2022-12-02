@@ -14,7 +14,7 @@ class CreateImportsTable extends Migration
             $table->string('name');
             $table->string('data_source');
             $table->text('relation')->nullable();
-            $table->boolean('for_relation')->nullable();
+            $table->boolean('for_relation')->default(0);
             $table->boolean('is_editable')->nullable();
             $table->string('import_model_class')->nullable();
             $table->text('column_list')->nullable();
