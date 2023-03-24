@@ -46,52 +46,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        /**
-         * EVENT FOR BUTTON
-         */
-        // Event::listen('backend.top.index', function ($controller) {
-        //     $user = \BackendAuth::getUser();
-        //     //trace_log($user->hasAccess('waka.importexport.imp.*'));
-
-        //     if (!$user->hasAccess('waka.importexport.imp.*')) {
-        //         //trace_log("false");
-        //         return;
-        //     }
-        //     //trace_log("ok");
-        //     if (in_array('Waka.ImportExport.Behaviors.ExcelImport', $controller->implement)) {
-        //         $data = [
-        //             'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
-        //             //'modelId' => $controller->formGetModel()->id
-        //         ];
-        //         return View::make('waka.importexport::excelimport_popup')->withData($data);;
-        //     }
-        // });
-        // Event::listen('backend.top.index', function ($controller) {
-        //     $user = \BackendAuth::getUser();
-        //     if (!$user->hasAccess('waka.importexport.exp.*')) {
-        //         return;
-        //     }
-        //     if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
-        //         $data = [
-        //             'model' => $modelClass = str_replace('\\', '\\\\', $controller->listGetConfig()->modelClass),
-        //             //'modelId' => $controller->formGetModel()->id
-        //         ];
-        //         return View::make('waka.importexport::excelexport_popup')->withData($data);;
-        //     }
-        // });
-        // Event::listen('backend.update.prod', function ($controller) {
-        //     if (get_class($controller) == 'Waka\ImportExport\Controllers\Exports') {
-        //         return;
-        //     }
-
-        //     if (in_array('Waka.ImportExport.Behaviors.ExcelExport', $controller->implement)) {
-        //         $data = [
-        //             'model' => $modelClass = str_replace('\\', '\\\\', get_class($controller->formGetModel())),
-        //             'modelId' => $controller->formGetModel()->id,
-        //         ];
-        //         return View::make('waka.importexport::excelexport_child_popup')->withData($data);;
-        //     }
-        // });
+       //A conserver en exemple //
         // Event::listen('backend.update.prod', function ($controller) {
         //     if (get_class($controller) == 'Waka\ImportExport\Controllers\Imports') {
         //         return;
@@ -170,24 +125,6 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.importexport.admin'],
                 'order' => 70,
             ],
-            // 'configExports' => [
-            //     'label' => Lang::get('waka.importexport::lang.menu.exports_title'),
-            //     'description' => Lang::get('waka.importexport::lang.menu.exports_description'),
-            //     'category' => Lang::get('waka.utils::lang.menu.settings_category_model'),
-            //     'url' => Backend::url('waka/importexport/configexports'),
-            //     'icon' => 'icon-caret-square-o-up',
-            //     'permissions' => ['waka.importexport.admin'],
-            //     'order' => 72,
-            // ],
-            // 'configImportlogs' => [
-            //     'label' => Lang::get('waka.importexport::lang.menu.logs_title'),
-            //     'description' => Lang::get('waka.importexport::lang.menu.logs_description'),
-            //     'category' => Lang::get('waka.utils::lang.menu.settings_category'),
-            //     'url' => Backend::url('waka/importexport/types'),
-            //     'icon' => 'icon-terminal',
-            //     'permissions' => ['waka.importexport.admin'],
-            //     'order' => 180,
-            // ],
         ];
     }
 }
