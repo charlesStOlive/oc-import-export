@@ -132,8 +132,8 @@ class ExcelExport extends ControllerBehavior
         ];
 
         $messages = [
-            'export_array.logeable_id.required' => Lang::get("waka.importexport::lang.errors.logeable_id"),
-            'logeable_type' => Lang::get("waka.importexport::lang.errors.exportType"),
+            'export_array.logeable_id.required' => Lang::get('waka.importexport::lang.errors.logeable_id'),
+            'logeable_type' => Lang::get('waka.importexport::lang.errors.exportType'),
         ];
 
         $validator = \Validator::make($inputs, $rules, $messages);
@@ -151,7 +151,7 @@ class ExcelExport extends ControllerBehavior
         ];
 
         $messages = [
-            'export_array.logeable_id.required' => Lang::get("waka.importexport::lang.errors.logeable_id"),
+            'export_array.logeable_id.required' => Lang::get('waka.importexport::lang.errors.logeable_id'),
         ];
 
         $validator = \Validator::make($inputs, $rules, $messages);
