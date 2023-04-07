@@ -5,6 +5,10 @@ return [
         "type" => "Type d'import",
         "type_placeholder" => "Choisissez le type d'import"
     ],
+    "errors" => [
+        "logeable_id" => "Erreur sur logeable_id",
+        "exportType" => "Erreur sur le type d'export"
+    ],
     "global" => [
         "btn_export" => "Export Excel",
         "btn_import" => "Import Excel",
@@ -23,9 +27,5 @@ return [
     "menu" => [
         "impexp_description" => "Gestion des imports et des exports",
         "impexp_title" => "Imports & Exports"
-    ],
-    "errors" => [
-        "logeable_id" => "Erreur sur logeable_id",
-        "exportType" => "Erreur sur le type d'export"
     ]
 ];
